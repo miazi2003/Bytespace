@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import LogoBar from '../components/LogoBar';
+import ExploreCourses from '../components/ExploreCourses';
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
         <Hero />
       </div>
       <LogoBar />
+      <ExploreCourses />
     </div>
   );
 }
