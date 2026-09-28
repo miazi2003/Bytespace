@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import LogoBar from '../components/LogoBar';
 import ExploreCourses from '../components/ExploreCourses';
+import LearningPaths from '../components/LearningPaths';
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
       </div>
       <LogoBar />
       <ExploreCourses />
+      <LearningPaths />
     </div>
   );
 }

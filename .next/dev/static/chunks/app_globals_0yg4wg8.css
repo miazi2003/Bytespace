@@ -530,6 +530,10 @@
     margin-top: calc(var(--spacing) * 12);
   }
 
+  .mt-\[70px\] {
+    margin-top: 70px;
+  }
+
   .mb-0\.5 {
     margin-bottom: calc(var(--spacing) * .5);
   }
@@ -578,6 +582,10 @@
     height: 26px;
   }
 
+  .h-\[28px\] {
+    height: 28px;
+  }
+
   .h-\[31px\] {
     height: 31px;
   }
@@ -598,8 +606,16 @@
     height: 52px;
   }
 
+  .h-\[60px\] {
+    height: 60px;
+  }
+
   .h-\[165px\] {
     height: 165px;
+  }
+
+  .h-\[167px\] {
+    height: 167px;
   }
 
   .h-\[380px\] {
@@ -626,6 +642,10 @@
     width: 26px;
   }
 
+  .w-\[28px\] {
+    width: 28px;
+  }
+
   .w-\[31px\] {
     width: 31px;
   }
@@ -636,6 +656,10 @@
 
   .w-\[55\%\] {
     width: 55%;
+  }
+
+  .w-\[60px\] {
+    width: 60px;
   }
 
   .w-\[65px\] {
@@ -696,6 +720,10 @@
 
   .max-w-\[840px\] {
     max-width: 840px;
+  }
+
+  .max-w-\[880px\] {
+    max-width: 880px;
   }
 
   .max-w-\[960px\] {
@@ -1163,6 +1191,10 @@
     font-size: 26px;
   }
 
+  .text-\[30px\] {
+    font-size: 30px;
+  }
+
   .text-\[32px\] {
     font-size: 32px;
   }
@@ -1313,6 +1345,11 @@
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
   }
 
+  .shadow-\[0_2px_12px_rgba\(0\,0\,0\,0\.02\)\] {
+    --tw-shadow: 0 2px 12px var(--tw-shadow-color, #00000005);
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+
   .shadow-\[0_4px_12px_rgba\(0\,0\,0\,0\.02\)\] {
     --tw-shadow: 0 4px 12px var(--tw-shadow-color, #00000005);
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
@@ -1422,6 +1459,10 @@
       --tw-scale-y: 105%;
       --tw-scale-z: 105%;
       scale: var(--tw-scale-x) var(--tw-scale-y);
+    }
+
+    .hover\:border-\[\#0F172A\]:hover {
+      border-color: #0f172a;
     }
 
     .hover\:bg-\[\#C4EC00\]:hover {
@@ -1800,6 +1841,10 @@
       font-size: 18px;
     }
 
+    .md\:text-\[36px\] {
+      font-size: 36px;
+    }
+
     .md\:text-\[44px\] {
       font-size: 44px;
     }
@@ -1932,6 +1977,10 @@
 
     .lg\:gap-8 {
       gap: calc(var(--spacing) * 8);
+    }
+
+    .lg\:gap-\[40px\] {
+      gap: 40px;
     }
 
     .lg\:gap-\[72px\] {

@@ -1,4 +1,4 @@
-:HL["/_next/static/chunks/3u16qtbz6v4og.css","style"]
+:HL["/_next/static/chunks/1ny_bjen0e7ki.css","style"]
 :HL["https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,600&display=swap","style"]
 :HL["https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&f[]=clash-display@600,700&display=swap","style"]
 :HL["/logoipsumimage/logoipsum1.png","image"]
@@ -6,4 +6,10 @@
 :HL["/logoipsumimage/logoipsum3.png","image"]
 :HL["/logoipsumimage/logoipsum4.png","image"]
 :HL["/logoipsumimage/logoipsum5.png","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}},"staleTime":300,"buildId":"a8MVqHUnAQFXKUT0sgXpT"}
+:HL["/icon-images/Frame (7).png","image"]
+:HL["/icon-images/Style=Filled.png","image"]
+:HL["/icon-images/Style=Filled (1).png","image"]
+:HL["/icon-images/Style=Round.png","image"]
+:HL["/icon-images/Style=Outlined (1).png","image"]
+:HL["/icon-images/Style=Outlined (2).png","image"]
+0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}},"staleTime":300,"buildId":"_7aiQA9KlApAFCnsJZuGU"}
