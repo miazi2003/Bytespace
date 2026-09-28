@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-blue: #0052FE;
+    --grid-line: rgba(255, 255, 255, 0.08);
+  }
+  body {
+    background-color: #0052FE;
+    font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+}
+
+.font-poppins {
+  font-family: 'Poppins', sans-serif;
+}
+
+.font-satoshi {
+  font-family: 'Satoshi', sans-serif;
+}
+
+.font-clash {
+  font-family: 'Clash Display', sans-serif;
+}
+
+.bg-grid-pattern {
+  background-color: #0052FE;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 74px 74px;
+  background-position: center top;
+}
