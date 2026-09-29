@@ -122,18 +122,18 @@ export default function FeatureShowcase() {
               <img
                 src="/images/Frame (8).png"
                 alt=""
-                className="absolute top-6 sm:top-8 right-6 sm:right-10 w-[150px] sm:w-[180px] object-contain z-0 select-none pointer-events-none"
+                className="absolute top-6 sm:top-24 right-6 sm:-right-22 w-[150px] sm:w-[200px] object-contain z-22 select-none pointer-events-none"
               />
 
               {/* Man Student Image (Layered over the CourseCard) */}
               <img
                 src="/images/29a52a24e51266edcd7d57d73392ee5fc4833220.png"
                 alt="Student with laptop"
-                className="absolute bottom-0 left-[24%] sm:left-[26%] w-[390px] sm:w-[470px] max-w-none object-contain z-10 select-none pointer-events-none drop-shadow-2xl"
+                className="absolute bottom-0 left-[24%] sm:left-[3%] w-[390px] sm:w-[580px] max-w-none object-contain z-10 select-none pointer-events-none drop-shadow-2xl"
               />
 
               {/* Floating Learning Progress Card (Foreground Right) */}
-              <div className="absolute bottom-12 sm:bottom-16 right-0 sm:-right-4 z-20 bg-white rounded-[24px] p-5 sm:p-6 shadow-[0_20px_50px_rgba(0,0,0,0.12)] border border-[#F1F5F9] w-[215px] sm:w-[240px]">
+              <div className="absolute bottom-12 sm:bottom-52 right-0 sm:-right-12 z-20 bg-white rounded-[24px] p-5 sm:p-6 shadow-[0_20px_50px_rgba(0,0,0,0.12)] border border-[#F1F5F9] w-[215px] sm:w-[240px]">
                 <span className="font-satoshi text-[13px] sm:text-[14px] font-medium text-[#475569] block mb-1">
                   Learning Progress
                 </span>
