@@ -188,27 +188,27 @@ export default function FeatureShowcase() {
                     $1,200.38
                   </span>
                 </div>
-                <div className="bg-[#D4FB20] text-[#0F172A] font-poppins font-bold text-[10px] px-2 py-0.5 rounded-full w-fit">
+                <div className="bg-[#D4FB20] text-[#0F172A] font-satoshi font-bold text-[10px] px-2 py-0.5 rounded-full w-fit">
                   +12%
                 </div>
               </div>
 
               {/* 3D Lime Doodle (Frame (8).png) */}
               <img
-                src="/images/Frame (8).png"
+                src="/images/testimage.png"
                 alt=""
-                className="absolute top-10 sm:top-14 right-6 sm:right-12 w-[150px] sm:w-[180px] object-contain z-0 select-none pointer-events-none"
+                className="absolute top-10 sm:top-18 right-6 sm:right-28 w-[150px] sm:w-[180px] object-contain z-20 select-none pointer-events-none"
               />
 
               {/* Woman Instructor Image (Overlapping Blue Cards) */}
               <img
                 src="/images/0d6596fb1df66aaf843ee85722f439fada233946.png"
                 alt="Instructor with headset and tablet"
-                className="absolute bottom-0 left-[18%] sm:left-[22%] w-[390px] sm:w-[470px] max-w-none object-contain z-10 select-none pointer-events-none drop-shadow-2xl"
+                className="absolute bottom-0 left-[18%] sm:-left-[14%] w-[390px] sm:w-[600px] max-w-none object-contain z-10 select-none pointer-events-none drop-shadow-2xl"
               />
 
               {/* Card 3: Happy Students Card (Hero Block Matching) */}
-              <div className="absolute bg-white rounded-2xl shadow-[0_16px_36px_-4px_rgba(0,0,0,0.12),0_6px_16px_-4px_rgba(0,0,0,0.06)] z-20 text-left py-3 sm:py-3.5 px-3.5 sm:px-4.5 bottom-6 sm:bottom-10 right-0 sm:-right-4 w-[230px] sm:w-[258px]">
+              <div className="absolute bg-white rounded-2xl shadow-[0_16px_36px_-4px_rgba(0,0,0,0.12),0_6px_16px_-4px_rgba(0,0,0,0.06)] z-20 text-left py-3 sm:py-3.5 px-3.5 sm:px-4.5 bottom-6 sm:bottom-26 right-0 sm:right-[14px] w-[230px] sm:w-[258px]">
                 <div className="flex flex-col items-start justify-between gap-1 mb-2.5">
                   <span className="font-poppins font-medium text-[14px] sm:text-[16px] text-[#0F172A]">
                     Happy Students

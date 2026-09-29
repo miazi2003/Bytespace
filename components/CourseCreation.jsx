@@ -81,7 +81,7 @@ export default function CourseCreation() {
                     $1,200.38
                   </span>
                 </div>
-                <div className="bg-[#D4FB20] text-[#0F172A] font-poppins font-bold text-[10px] px-2 py-0.5 rounded-full w-fit">
+                <div className="bg-[#D4FB20] text-[#0F172A] font-satoshi font-bold text-[10px] px-2 py-0.5 rounded-full w-fit">
                   +12%
                 </div>
               </div>
