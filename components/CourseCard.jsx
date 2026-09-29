@@ -13,10 +13,10 @@ export default function CourseCard({ course }) {
     price = '$25',
     period = '/lifetime',
     avatars = [
-      'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&h=80&fit=crop&crop=faces',
-      'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=80&h=80&fit=crop&crop=faces',
-      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop&crop=faces',
-      'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=faces',
+      '/customerImage/1e078348a54489bfd231d82fe1944770883c8d80.png',
+      '/customerImage/5824acacb3b76175bc84084ec18597109498f96d.png',
+      '/customerImage/7fdccc783264eedc4fb989984eecbc4058a219f2.png',
+      '/customerImage/83fb3e04056cc892636460bee5791aa3f243854c.png',
     ],
     studentCount = '26+',
   } = course;
@@ -63,8 +63,8 @@ export default function CourseCard({ course }) {
       </div>
 
       <div>
-        <div className="flex items-center justify-between mt-2">
-          <div className="flex items-center gap-1.5 px-3 py-1 bg-[#F5F5F6] rounded-full text-[12px] font-satoshi font-medium text-[#475569]">
+        <div className="flex items-center gap-3 mt-3">
+          <div className="flex items-center gap-1.5 px-3 py-1 bg-[#F5F5F6] rounded-full text-[12px] font-satoshi font-medium text-[#475569] flex-shrink-0">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
               <rect x="3" y="14" width="3.5" height="7" rx="1" />
               <rect x="9.5" y="9" width="3.5" height="12" rx="1" />
@@ -73,16 +73,16 @@ export default function CourseCard({ course }) {
             <span>{level}</span>
           </div>
 
-          <div className="flex items-center">
+          <div className="flex items-center flex-shrink-0">
             {avatars.map((av, idx) => (
               <img
                 key={idx}
                 src={av}
                 alt="Student"
-                className="w-[32px] h-[32px] rounded-full border-2 border-white object-cover bg-slate-200 -ml-2 first:ml-0"
+                className="w-[32px] h-[32px] rounded-full border-2 border-white object-cover bg-slate-200 -ml-2 first:ml-0 flex-shrink-0"
               />
             ))}
-            <div className="w-[32px] h-[32px] rounded-full bg-[#D4FB20] border-2 border-white -ml-2 flex items-center justify-center font-poppins font-bold text-[11px] text-[#0F172A]">
+            <div className="w-[32px] h-[32px] rounded-full bg-[#D4FB20] border-2 border-white -ml-2 flex items-center justify-center font-poppins font-bold text-[11px] text-[#0F172A] flex-shrink-0">
               {studentCount}
             </div>
           </div>

@@ -7,7 +7,7 @@ const FEATURED_COURSES = [
   {
     id: 1,
     title: 'Learn Figma from Basic',
-    image: 'https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=600&auto=format&fit=crop&q=80',
+    image: '/courseCardImage/93ad9f9e6bdb3c7f3c478820624ee19ad7320072.jpg',
     lessons: '17 Lessons',
     duration: '2 hours 16 mins',
     comments: '59 Comments',
@@ -21,7 +21,7 @@ const FEATURED_COURSES = [
   {
     id: 2,
     title: 'Build Digital Asset',
-    image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&auto=format&fit=crop&q=80',
+    image: '/courseCardImage/c88264191d691ba3300ad4f82a942429bb912fa5.jpg',
     lessons: '17 Lessons',
     duration: '2 hours 16 mins',
     comments: '59 Comments',
@@ -35,7 +35,7 @@ const FEATURED_COURSES = [
   {
     id: 3,
     title: 'the Power of Big Data',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&auto=format&fit=crop&q=80',
+    image: '/courseCardImage/4f3bdea5688b1a654db7a29b0bc5dd3563059d11.jpg',
     lessons: '17 Lessons',
     duration: '2 hours 16 mins',
     comments: '59 Comments',
@@ -49,7 +49,7 @@ const FEATURED_COURSES = [
   {
     id: 4,
     title: 'Balancing Productivity an...',
-    image: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=600&auto=format&fit=crop&q=80',
+    image: '/courseCardImage/72e18d90fb9ddac1944e3483a501f3cdae505f57.jpg',
     lessons: '17 Lessons',
     duration: '2 hours 16 mins',
     comments: '59 Comments',
@@ -63,7 +63,7 @@ const FEATURED_COURSES = [
   {
     id: 5,
     title: 'Mastering Money Manage...',
-    image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&auto=format&fit=crop&q=80',
+    image: '/courseCardImage/a89789455304dbf5cadc8e011bc26c97145aa56c.jpg',
     lessons: '17 Lessons',
     duration: '2 hours 16 mins',
     comments: '59 Comments',
@@ -77,7 +77,7 @@ const FEATURED_COURSES = [
   {
     id: 6,
     title: 'From Idea to Startup Succ...',
-    image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&auto=format&fit=crop&q=80',
+    image: '/courseCardImage/69362b026219ac3eb8b4e77e8bbe4e18c4464b44.jpg',
     lessons: '17 Lessons',
     duration: '2 hours 16 mins',
     comments: '59 Comments',

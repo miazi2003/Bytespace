@@ -4,7 +4,7 @@ import CourseCard from './CourseCard';
 const FIGMA_COURSE = {
   id: 1,
   title: 'Learn Figma from Basic',
-  image: 'https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=600&auto=format&fit=crop&q=80',
+  image: '/courseCardImage/93ad9f9e6bdb3c7f3c478820624ee19ad7320072.jpg',
   lessons: '17 Lessons',
   duration: '2 hours 16 mins',
   comments: '59 Comments',
@@ -208,7 +208,7 @@ export default function FeatureShowcase() {
               />
 
               {/* Card 3: Happy Students Card (Hero Block Matching) */}
-              <div className="absolute bg-white rounded-2xl shadow-[0_16px_36px_-4px_rgba(0,0,0,0.12),0_6px_16px_-4px_rgba(0,0,0,0.06)] z-20 text-left py-3 sm:py-3.5 px-3.5 sm:px-4.5 bottom-6 sm:bottom-26 right-0 sm:right-[14px] w-[230px] sm:w-[258px]">
+              <div className="absolute bg-white rounded-2xl shadow-[0_16px_36px_-4px_rgba(0,0,0,0.12),0_6px_16px_-4px_rgba(0,0,0,0.06)] z-20 text-left py-3 sm:py-3.5 px-3.5 sm:px-4.5 bottom-6 sm:bottom-26 right-0 sm:right-[14px] w-max max-w-[95%]">
                 <div className="flex flex-col items-start justify-between gap-1 mb-2.5">
                   <span className="font-poppins font-medium text-[14px] sm:text-[16px] text-[#0F172A]">
                     Happy Students
@@ -218,32 +218,22 @@ export default function FeatureShowcase() {
                   </span>
                 </div>
                 <div className="flex items-center">
-                  <img 
-                    className="w-[30px] sm:w-[38px] h-[30px] sm:h-[38px] rounded-full border-2 border-white object-cover bg-slate-300 first:ml-0 -ml-2" 
-                    src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&h=80&fit=crop&crop=faces" 
-                    alt="Student 1" 
-                  />
-                  <img 
-                    className="w-[30px] sm:w-[38px] h-[30px] sm:h-[38px] rounded-full border-2 border-white object-cover bg-slate-300 -ml-2" 
-                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=faces" 
-                    alt="Student 2" 
-                  />
-                  <img 
-                    className="w-[30px] sm:w-[38px] h-[30px] sm:h-[38px] rounded-full border-2 border-white object-cover bg-slate-300 -ml-2" 
-                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop&crop=faces" 
-                    alt="Student 3" 
-                  />
-                  <img 
-                    className="w-[30px] sm:w-[38px] h-[30px] sm:h-[38px] rounded-full border-2 border-white object-cover bg-slate-300 -ml-2" 
-                    src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop&crop=faces" 
-                    alt="Student 4" 
-                  />
-                  <img 
-                    className="w-[30px] sm:w-[38px] h-[30px] sm:h-[38px] rounded-full border-2 border-white object-cover bg-slate-300 -ml-2" 
-                    src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=80&h=80&fit=crop&crop=faces" 
-                    alt="Student 5" 
-                  />
-                  <div className="font-satoshi w-[30px] sm:w-[38px] h-[30px] sm:h-[38px] rounded-full bg-[#D5FF00] border-2 border-white -ml-2 flex items-center justify-center font-poppins font-bold text-[10px] sm:text-[12px] text-[#0F172A] z-10">
+                  {[
+                    '/customerImage/1e078348a54489bfd231d82fe1944770883c8d80.png',
+                    '/customerImage/5824acacb3b76175bc84084ec18597109498f96d.png',
+                    '/customerImage/7fdccc783264eedc4fb989984eecbc4058a219f2.png',
+                    '/customerImage/83fb3e04056cc892636460bee5791aa3f243854c.png',
+                    '/customerImage/9ef8cb329b949267cc8214b6727067c4a13af4b4.png',
+                    '/customerImage/b44979e1c98ecb3ec92ac86805fe55581fbeaa60.png',
+                  ].map((imgSrc, idx) => (
+                    <img
+                      key={idx}
+                      src={imgSrc}
+                      alt={`Student ${idx + 1}`}
+                      className="w-[28px] sm:w-[36px] h-[28px] sm:h-[36px] rounded-full flex-shrink-0 border-2 border-white object-cover bg-slate-300 first:ml-0 -ml-1.5 sm:-ml-2"
+                    />
+                  ))}
+                  <div className="font-satoshi w-[28px] sm:w-[36px] h-[28px] sm:h-[36px] rounded-full flex-shrink-0 bg-[#D4FB20] border-2 border-white -ml-1.5 sm:-ml-2 flex items-center justify-center font-poppins font-bold text-[10px] sm:text-[11px] text-[#0F172A] z-10">
                     2K+
                   </div>
                 </div>
