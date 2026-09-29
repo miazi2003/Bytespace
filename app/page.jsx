@@ -4,6 +4,7 @@ import Hero from '../components/Hero';
 import LogoBar from '../components/LogoBar';
 import ExploreCourses from '../components/ExploreCourses';
 import LearningPaths from '../components/LearningPaths';
+import FeatureShowcase from '../components/FeatureShowcase';
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       <LogoBar />
       <ExploreCourses />
       <LearningPaths />
+      <FeatureShowcase />
     </div>
   );
 }

@@ -53,7 +53,7 @@ export default function LearningPaths() {
       </div>
 
       {/* Categories Icon Container */}
-      <div className="w-full px-6 lg:px-[120px] mx-auto mt-[70px]">
+      <div className="w-full max-w-[1240px] mx-auto px-4 sm:px-6 mt-[70px]">
         <div className="flex flex-wrap items-center justify-center gap-6 lg:gap-[40px]">
           {CATEGORIES.map((cat) => (
             <div
