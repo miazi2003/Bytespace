@@ -4,9 +4,9 @@ import Hero from '../components/Hero';
 import LogoBar from '../components/LogoBar';
 import ExploreCourses from '../components/ExploreCourses';
 import LearningPaths from '../components/LearningPaths';
-import ProfessionalGrowth from '../components/ProfessionalGrowth';
-import CourseCreation from '../components/CourseCreation';
+import FeatureShowcase from '../components/FeatureShowcase';
 import CreatorCTA from '../components/CreatorCTA';
+import Testimonials from '../components/Testimonials';
 
 export default function Home() {
   return (
@@ -18,10 +18,9 @@ export default function Home() {
       <LogoBar />
       <ExploreCourses />
       <LearningPaths />
-      <ProfessionalGrowth />
-      <CourseCreation />
-      <CreatorCTA/>
-      <CourseCreation />
+      <FeatureShowcase />
+      <CreatorCTA />
+      <Testimonials />
     </div>
   );
 }
