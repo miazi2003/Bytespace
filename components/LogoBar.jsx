@@ -11,7 +11,7 @@ export default function LogoBar() {
 
   return (
     <section className="w-full bg-[#F5F5F6] h-auto py-8 lg:py-0 lg:h-[202px] flex items-center relative z-20">
-      <div className="w-full max-w-[1240px] px-4 sm:px-6 mx-auto">
+      <div className="w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-center lg:justify-between gap-8 md:gap-12 lg:gap-[72px] flex-wrap lg:flex-nowrap">
           {logos.map((logo, index) => (
             <img

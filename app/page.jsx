@@ -7,6 +7,7 @@ import LearningPaths from '../components/LearningPaths';
 import FeatureShowcase from '../components/FeatureShowcase';
 import CreatorCTA from '../components/CreatorCTA';
 import Testimonials from '../components/Testimonials';
+import Footer from '../components/Footer';
 
 export default function Home() {
   return (
@@ -21,6 +22,7 @@ export default function Home() {
       <FeatureShowcase />
       <CreatorCTA />
       <Testimonials />
+      <Footer />
     </div>
   );
 }

@@ -66,7 +66,7 @@ export default function Testimonials() {
         />
       </div>
 
-      <div className="relative z-10 w-full max-w-[1240px] mx-auto px-4 sm:px-6">
+      <div className="relative z-10 w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header: Heading & Description in Flex Row */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-[40px] mb-14">
           <h2 className="font-poppins font-semibold text-[32px] sm:text-[40px] lg:text-[44px] text-[#0F172A] leading-[1.18] max-w-[500px]">

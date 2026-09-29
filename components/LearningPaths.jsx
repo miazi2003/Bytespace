@@ -42,19 +42,19 @@ const CATEGORIES = [
 export default function LearningPaths() {
   return (
     <section className="w-full py-[72px] bg-white flex flex-col items-center">
-      {/* Header Container */}
-      <div className="w-full px-6 max-w-[880px] mx-auto text-center">
-        <h2 className="font-poppins font-semibold text-[30px] md:text-[36px] text-[#0F172A] leading-tight mb-4">
-          Explore Diverse Learning Paths at Bytespace
-        </h2>
-        <p className="font-satoshi text-[16px] md:text-[18px] text-[#82868E] leading-relaxed">
-          At Bytespace, we believe in empowering individuals through knowledge. Our diverse range of courses spans various fields, ensuring there's something for everyone. Unleash your potential and explore our carefully curated categories.
-        </p>
-      </div>
+      <div className="w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
+        {/* Header Container */}
+        <div className="w-full max-w-[880px] mx-auto text-center mb-[70px]">
+          <h2 className="font-poppins font-semibold text-[30px] md:text-[36px] text-[#0F172A] leading-tight mb-4">
+            Explore Diverse Learning Paths at Bytespace
+          </h2>
+          <p className="font-satoshi text-[16px] md:text-[18px] text-[#82868E] leading-relaxed">
+            At Bytespace, we believe in empowering individuals through knowledge. Our diverse range of courses spans various fields, ensuring there's something for everyone. Unleash your potential and explore our carefully curated categories.
+          </p>
+        </div>
 
-      {/* Categories Icon Container */}
-      <div className="w-full max-w-[1240px] mx-auto px-4 sm:px-6 mt-[70px]">
-        <div className="flex flex-wrap items-center justify-center gap-6 lg:gap-[40px]">
+        {/* Categories Icon Container */}
+        <div className="w-full flex items-center justify-center gap-6 lg:gap-[40px]">
           {CATEGORIES.map((cat) => (
             <div
               key={cat.id}

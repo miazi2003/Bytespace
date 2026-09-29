@@ -70,7 +70,7 @@ export default function FeatureShowcase() {
       </div>
 
       {/* BLOCK 1: Professional Growth (Man & Course Card) */}
-      <div className="relative z-10 w-full max-w-[1240px] mx-auto px-4 sm:px-6">
+      <div className="relative z-10 w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-[60px]">
           {/* Left Text & Stats Column */}
           <div className="w-full lg:w-1/2 flex flex-col items-start text-left">
@@ -150,7 +150,7 @@ export default function FeatureShowcase() {
       </div>
 
       {/* BLOCK 2: Course Creation (Woman & Instructor Cards) */}
-      <div className="relative z-10 w-full max-w-[1240px] mx-auto px-4 sm:px-6">
+      <div className="relative z-10 w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-[60px]">
           {/* Left Composite Graphic Column */}
           <div className="w-full lg:w-1/2 flex items-center justify-center order-2 lg:order-1">
