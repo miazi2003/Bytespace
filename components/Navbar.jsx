@@ -9,15 +9,17 @@ export default function Navbar() {
     <header className="w-full h-auto lg:h-[120px] flex items-center pt-6 pb-4 lg:py-0 relative z-30">
       <div className="w-full px-6 sm:px-10 lg:px-[120px]">
         <nav className="flex items-center justify-between relative" aria-label="Main Navigation">
-          <a href="#" className="flex items-baseline gap-2.5 select-none text-white focus:outline-none">
+          <a href="#" className="flex items-center gap-2.5 select-none focus:outline-none">
             <img 
               src="/logo.png" 
-              alt="ByteSpace" 
-              className="w-[31px] h-[31px] object-contain flex-shrink-0" 
+              alt="ByteSpace Icon" 
+              className="w-[29px] h-[32px] object-contain flex-shrink-0" 
             />
-            <span className="font-clash font-bold text-[24px] tracking-[-0.01em] text-white">
-              ByteSpace
-            </span>
+            <img
+              src="/images/logo-text-dark.png"
+              alt="ByteSpace"
+              className="w-[133px] h-[21px] object-contain flex-shrink-0 brightness-0 invert"
+            />
           </a>
 
           <ul className="hidden md:flex items-center gap-9 absolute left-1/2 -translate-x-1/2 list-none">

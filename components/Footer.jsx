@@ -41,15 +41,17 @@ export default function Footer() {
           {/* Left Column: Logo & Newsletter */}
           <div className="flex flex-col max-w-[500px]">
             {/* Logo */}
-            <a href="#" className="flex items-center gap-2.5 select-none focus:outline-none mb-4">
+            <a href="#" className="flex items-end gap-2.5 select-none focus:outline-none mb-4">
               <img
                 src="/logo.png"
-                alt="ByteSpace"
-                className="w-[28px] h-[32px] object-contain flex-shrink-0"
+                alt="ByteSpace Icon"
+                className="w-[29px] h-[32px] object-contain flex-shrink-0"
               />
-              <span className="font-clash font-bold text-[24px] text-[#0F172A] leading-none">
-                ByteSpace
-              </span>
+              <img
+                src="/images/logo-text-dark.png"
+                alt="ByteSpace"
+                className="w-[133px] h-[21px] object-contain flex-shrink-0"
+              />
             </a>
 
             {/* Newsletter Heading / Subtitle */}
