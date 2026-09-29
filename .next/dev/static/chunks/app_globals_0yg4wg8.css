@@ -540,6 +540,14 @@
     right: calc(var(--spacing) * 10);
   }
 
+  .right-\[\%\] {
+    right: %;
+  }
+
+  .right-\[1\%\] {
+    right: 1%;
+  }
+
   .right-\[10\%\] {
     right: 10%;
   }
@@ -628,6 +636,22 @@
     bottom: calc(var(--spacing) * 20);
   }
 
+  .bottom-\[0px\] {
+    bottom: 0;
+  }
+
+  .bottom-\[20px\] {
+    bottom: 20px;
+  }
+
+  .bottom-\[50px\] {
+    bottom: 50px;
+  }
+
+  .bottom-\[60px\] {
+    bottom: 60px;
+  }
+
   .-left-\[10px\] {
     left: -10px;
   }
@@ -680,6 +704,10 @@
     left: calc(var(--spacing) * 3);
   }
 
+  .left-\[5px\] {
+    left: 5px;
+  }
+
   .left-\[10\%\] {
     left: 10%;
   }
@@ -702,6 +730,10 @@
 
   .left-\[35px\] {
     left: 35px;
+  }
+
+  .left-\[45px\] {
+    left: 45px;
   }
 
   .left-\[50\%\] {
@@ -1307,6 +1339,10 @@
     scale: var(--tw-scale-x) var(--tw-scale-y);
   }
 
+  .-rotate-\[0deg\] {
+    rotate: none;
+  }
+
   .-rotate-\[1deg\] {
     rotate: -1deg;
   }
@@ -1317,6 +1353,10 @@
 
   .-rotate-\[15deg\] {
     rotate: -15deg;
+  }
+
+  .-rotate-\[deg\] {
+    rotate: calc(deg * -1);
   }
 
   .rotate-\[1deg\] {
@@ -2244,6 +2284,14 @@
       top: calc(var(--spacing) * -14);
     }
 
+    .sm\:-top-\[0px\] {
+      top: 0;
+    }
+
+    .sm\:-top-\[10px\] {
+      top: -10px;
+    }
+
     .sm\:-top-\[40px\] {
       top: -40px;
     }
@@ -2328,8 +2376,16 @@
       top: calc(var(--spacing) * 52);
     }
 
+    .sm\:top-\[0px\] {
+      top: 0;
+    }
+
     .sm\:top-\[5\%\] {
       top: 5%;
+    }
+
+    .sm\:top-\[10px\] {
+      top: 10px;
     }
 
     .sm\:top-\[15\%\] {
@@ -2354,6 +2410,10 @@
 
     .sm\:top-\[30px\] {
       top: 30px;
+    }
+
+    .sm\:top-\[50px\] {
+      top: 50px;
     }
 
     .sm\:top-\[70px\] {
@@ -2456,6 +2516,18 @@
       right: calc(var(--spacing) * 28);
     }
 
+    .sm\:right-\[1\%\] {
+      right: 1%;
+    }
+
+    .sm\:right-\[1px\] {
+      right: 1px;
+    }
+
+    .sm\:right-\[3px\] {
+      right: 3px;
+    }
+
     .sm\:right-\[10\%\] {
       right: 10%;
     }
@@ -2468,8 +2540,20 @@
       right: 15%;
     }
 
+    .sm\:right-\[15px\] {
+      right: 15px;
+    }
+
     .sm\:right-\[30px\] {
       right: 30px;
+    }
+
+    .sm\:right-\[px\] {
+      right: px;
+    }
+
+    .sm\:-bottom-\[0px\] {
+      bottom: 0;
     }
 
     .sm\:-bottom-\[30px\] {
@@ -2530,6 +2614,26 @@
 
     .sm\:bottom-52 {
       bottom: calc(var(--spacing) * 52);
+    }
+
+    .sm\:bottom-\[0px\] {
+      bottom: 0;
+    }
+
+    .sm\:bottom-\[6px\] {
+      bottom: 6px;
+    }
+
+    .sm\:bottom-\[65px\] {
+      bottom: 65px;
+    }
+
+    .sm\:bottom-\[70px\] {
+      bottom: 70px;
+    }
+
+    .sm\:bottom-\[px\] {
+      bottom: px;
     }
 
     .sm\:-left-4 {
@@ -2596,6 +2700,14 @@
       left: 3%;
     }
 
+    .sm\:left-\[4px\] {
+      left: 4px;
+    }
+
+    .sm\:left-\[5px\] {
+      left: 5px;
+    }
+
     .sm\:left-\[8\%\] {
       left: 8%;
     }
@@ -2628,8 +2740,16 @@
       left: 26%;
     }
 
+    .sm\:left-\[45px\] {
+      left: 45px;
+    }
+
     .sm\:left-\[50px\] {
       left: 50px;
+    }
+
+    .sm\:left-\[px\] {
+      left: px;
     }
 
     .sm\:mb-2\.5 {
@@ -2696,16 +2816,40 @@
       min-height: 120px;
     }
 
-    .sm\:w-\[0px\] {
+    .sm\:w-\[0px\], .sm\:w-\[00px\] {
       width: 0;
+    }
+
+    .sm\:w-\[1px\] {
+      width: 1px;
     }
 
     .sm\:w-\[2px\] {
       width: 2px;
     }
 
+    .sm\:w-\[3px\] {
+      width: 3px;
+    }
+
     .sm\:w-\[10px\] {
       width: 10px;
+    }
+
+    .sm\:w-\[12px\] {
+      width: 12px;
+    }
+
+    .sm\:w-\[17px\] {
+      width: 17px;
+    }
+
+    .sm\:w-\[18px\] {
+      width: 18px;
+    }
+
+    .sm\:w-\[19px\] {
+      width: 19px;
     }
 
     .sm\:w-\[20px\] {
@@ -2718,6 +2862,10 @@
 
     .sm\:w-\[24px\] {
       width: 24px;
+    }
+
+    .sm\:w-\[30px\] {
+      width: 30px;
     }
 
     .sm\:w-\[38px\] {
@@ -2776,6 +2924,10 @@
       width: 185px;
     }
 
+    .sm\:w-\[188px\] {
+      width: 188px;
+    }
+
     .sm\:w-\[190px\] {
       width: 190px;
     }
@@ -2810,6 +2962,14 @@
 
     .sm\:w-\[258px\] {
       width: 258px;
+    }
+
+    .sm\:w-\[300px\] {
+      width: 300px;
+    }
+
+    .sm\:w-\[320px\] {
+      width: 320px;
     }
 
     .sm\:w-\[350px\] {
@@ -2854,6 +3014,10 @@
 
     .sm\:w-\[780px\] {
       width: 780px;
+    }
+
+    .sm\:w-\[px\] {
+      width: px;
     }
 
     .sm\:min-w-\[210px\] {
