@@ -9,7 +9,7 @@ export default function Hero() {
         <img 
           src="/images/Frame.png" 
           alt="" 
-          className="absolute top-[120px] sm:top-[70px] left-0 sm:left-2 lg:left-0 w-[120px] sm:w-[150px] lg:w-[350px] -rotate-[1deg] select-none pointer-events-none" 
+          className="absolute top-[210px] sm:top-[70px] -left-2 sm:left-2 lg:left-0 w-[85px] sm:w-[150px] lg:w-[350px] -rotate-[1deg] select-none pointer-events-none" 
         />
         <img 
           src="/images/Frame (1).png" 
@@ -17,24 +17,14 @@ export default function Hero() {
           className="absolute top-[340px] sm:top-[380px] left-[10%] sm:left-[12%] lg:left-[15%] w-[65px] sm:w-[185px] -rotate-[15deg] select-none pointer-events-none hidden md:block" 
         />
         <img 
-          src="/images/Cone (2).png" 
-          alt="" 
-          className="absolute -bottom-4 sm:bottom-0 left-0 sm:left-4 lg:left-56 w-[170px] sm:w-[220px] lg:w-[380px] -rotate-[10deg] select-none pointer-events-none z-[5]" 
-        />
-        <img 
           src="/images/Cone (1).png" 
           alt="" 
-          className="absolute top-[110px] sm:top-[100px] right-0 sm:right-2 lg:-right-[4px] w-[110px] sm:w-[140px] lg:w-[250px] rotate-[1deg] select-none pointer-events-none" 
+          className="absolute top-[210px] sm:top-[100px] -right-2 sm:right-2 lg:-right-[4px] w-[80px] sm:w-[140px] lg:w-[250px] rotate-[1deg] select-none pointer-events-none" 
         />
         <img 
           src="/images/Cone.png" 
           alt="" 
           className="absolute top-[370px] sm:top-[360px] right-[10%] sm:right-[12%] lg:right-[8%] w-[75px] sm:w-[190px] select-none pointer-events-none hidden md:block" 
-        />
-        <img 
-          src="/images/Frame (1).png" 
-          alt="" 
-          className="absolute bottom-4 sm:-bottom-[30px] right-0 sm:right-2 lg:right-[150px] w-[120px] sm:w-[150px] lg:w-[400px] rotate-[3deg] select-none pointer-events-none" 
         />
       </div>
 
@@ -84,19 +74,35 @@ export default function Hero() {
       </div>
 
       <div className="relative w-full h-[380px] sm:h-[460px] md:h-[540px] mt-2">
+        {/* Green Ellipse under man */}
         <img 
           src="/images/Ellipse 7.png" 
           alt="" 
-          className="absolute -bottom-[80px] left-1/2 -translate-x-1/2 w-[520px] sm:w-[780px] md:w-[1140px] lg:w-[1480px] max-w-full h-auto z-[1] select-none pointer-events-none" 
+          className="absolute -bottom-[30px] sm:-bottom-[80px] left-1/2 -translate-x-1/2 w-[520px] sm:w-[780px] md:w-[1140px] lg:w-[1480px] max-w-full h-auto z-[2] lg:z-[1] select-none pointer-events-none" 
         />
 
+        {/* Round Element (Cone 2): under man, above green ellipse */}
+        <img 
+          src="/images/Cone (2).png" 
+          alt="" 
+          className="absolute bottom-[40px] sm:bottom-0 left-0 sm:left-4 lg:left-56 w-[170px] sm:w-[220px] lg:w-[380px] -rotate-[10deg] select-none pointer-events-none z-[5] lg:z-[5]" 
+        />
+
+        {/* Right White Spiral Ribbon: Frame (1) */}
+        <img 
+          src="/images/Frame (1).png" 
+          alt="" 
+          className="absolute bottom-[65px] sm:-bottom-[30px] right-0 sm:right-2 lg:right-[150px] w-[120px] sm:w-[150px] lg:w-[400px] rotate-[3deg] select-none pointer-events-none z-[5] lg:z-[3]" 
+        />
+
+        {/* The Man: above round element, happy students, and green ellipse */}
         <img 
           src="/images/29a52a24e51266edcd7d57d73392ee5fc4833220.png" 
           alt="Student with headphones and laptop" 
-          className="absolute -bottom-[80px] left-1/2 -translate-x-1/2 w-[310px] sm:w-[430px] md:w-[700px] max-w-full h-auto z-[4] select-none pointer-events-none" 
+          className="absolute -bottom-[30px] sm:-bottom-[80px] left-1/2 -translate-x-1/2 w-[310px] sm:w-[430px] md:w-[700px] max-w-full h-auto z-[10] lg:z-[4] select-none pointer-events-none" 
         />
 
-        <div className="absolute bg-white rounded-2xl shadow-[0_16px_36px_-4px_rgba(0,0,0,0.12),0_6px_16px_-4px_rgba(0,0,0,0.06)] z-[12] text-left transition-transform py-3 sm:py-3.5 px-4 sm:px-5 top-[50px] sm:top-[85px] md:top-[135px] left-3 sm:left-[10%] md:left-[22%] lg:left-[26%]" >
+        <div className="absolute bg-white rounded-2xl shadow-[0_16px_36px_-4px_rgba(0,0,0,0.12),0_6px_16px_-4px_rgba(0,0,0,0.06)] z-[12] lg:z-[12] text-left transition-transform py-3 sm:py-3.5 px-4 sm:px-5 top-[50px] sm:top-[85px] md:top-[135px] left-3 sm:left-[10%] md:left-[22%] lg:left-[26%]" >
           <div className="font-poppins font-medium text-[13px] sm:text-[18px] text-[#0F172A] mb-0.5">
             UI/UX Design
           </div>
@@ -105,7 +111,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="absolute bg-white rounded-2xl shadow-[0_16px_36px_-4px_rgba(0,0,0,0.12),0_6px_16px_-4px_rgba(0,0,0,0.06)] z-[12] text-left transition-transform py-3.5 sm:py-4 px-4 sm:px-5.5 min-w-[145px] sm:min-w-[210px] sm:min-h-[120px] top-[65px] sm:top-[100px] md:top-[150px] right-3 sm:right-[10%] md:right-[21%] lg:right-[25%]">
+        <div className="absolute bg-white rounded-2xl shadow-[0_16px_36px_-4px_rgba(0,0,0,0.12),0_6px_16px_-4px_rgba(0,0,0,0.06)] z-[12] lg:z-[12] text-left transition-transform py-3.5 sm:py-4 px-4 sm:px-5.5 min-w-[145px] sm:min-w-[210px] sm:min-h-[120px] top-[65px] sm:top-[100px] md:top-[150px] right-3 sm:right-[10%] md:right-[21%] lg:right-[25%]">
           <div className="font-satoshi font-medium text-[11px] sm:text-[12px] text-[#475569] mb-1">
             Learning Progress
           </div>
@@ -117,7 +123,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="absolute bg-white rounded-2xl shadow-[0_16px_36px_-4px_rgba(0,0,0,0.12),0_6px_16px_-4px_rgba(0,0,0,0.06)] z-[15] text-left transition-transform py-3 sm:py-3.5 px-3.5 sm:px-4.5 bottom-3 sm:bottom-8 md:bottom-[45px] left-3 sm:left-[8%] md:left-[17%] lg:left-[30%] w-max max-w-[95%]">
+        <div className="absolute bg-white rounded-2xl shadow-[0_16px_36px_-4px_rgba(0,0,0,0.12),0_6px_16px_-4px_rgba(0,0,0,0.06)] z-[8] lg:z-[15] text-left transition-transform py-3 sm:py-3.5 px-3.5 sm:px-4.5 bottom-[130px] sm:bottom-8 md:bottom-[45px] left-3 sm:left-[8%] md:left-[17%] lg:left-[30%] w-max max-w-[95%]">
           <div className="flex flex-col items-left justify-between gap-3 sm:gap-1 mb-2 sm:mb-2.5">
             <span className="font-poppins font-medium text-[12.5px] sm:text-[16px] text-[#0F172A]">
               Happy Students
