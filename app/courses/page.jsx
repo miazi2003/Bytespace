@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import CourseCard from '../../components/CourseCard';
@@ -488,6 +488,16 @@ export default function CoursesPage() {
   const [activeLevel, setActiveLevel] = useState('All Levels');
   const [sortBy, setSortBy] = useState('Most relevant');
   const [currentPage, setCurrentPage] = useState(1);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Filter Dropdown Visibility States
   const [isLevelOpen, setIsLevelOpen] = useState(false);
@@ -531,7 +541,7 @@ export default function CoursesPage() {
     return list;
   }, [searchTerm, activeCategory, activeLevel, sortBy]);
 
-  // Pagination Calculation: Ensure 18 cards per page across 5 pages (90 total)
+  // Pagination Calculation: 6 cards per page on mobile, 18 cards per page on desktop
   const paddedCourses = useMemo(() => {
     if (filteredCourses.length === 0) return [];
     let list = [];
@@ -541,12 +551,12 @@ export default function CoursesPage() {
     return list.slice(0, 90);
   }, [filteredCourses]);
 
-  const ITEMS_PER_PAGE = 18;
+  const ITEMS_PER_PAGE = isMobile ? 6 : 18;
   const totalPages = Math.max(1, Math.ceil(paddedCourses.length / ITEMS_PER_PAGE));
   const currentCourses = useMemo(() => {
     const start = (currentPage - 1) * ITEMS_PER_PAGE;
     return paddedCourses.slice(start, start + ITEMS_PER_PAGE);
-  }, [paddedCourses, currentPage]);
+  }, [paddedCourses, currentPage, ITEMS_PER_PAGE]);
 
   const handlePageChange = (page) => {
     if (page >= 1 && page <= totalPages) {
@@ -881,15 +891,15 @@ export default function CoursesPage() {
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
               aria-label="Previous Page"
-              className={`w-[46px] h-[46px] rounded-[24px] border border-[#E2E8F0] flex items-center justify-center transition-all ${
+              className={`w-[56px] h-[46px] rounded-[24px] border border-[#E2E8F0] flex items-center justify-center transition-all ${
                 currentPage === 1
                   ? 'opacity-40 cursor-not-allowed text-[#94A3B8]'
                   : 'hover:bg-[#F8FAFC] active:scale-95 text-[#0F172A] cursor-pointer'
               }`}
             >
               <svg
-                width="16"
-                height="16"
+                width="24"
+                height="20"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="#0F172A"
@@ -928,15 +938,15 @@ export default function CoursesPage() {
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
               aria-label="Next Page"
-              className={`w-[46px] h-[46px] rounded-[24px] border border-[#E2E8F0] flex items-center justify-center transition-all ${
+              className={`w-[56px] h-[46px] rounded-[24px] border border-[#E2E8F0] flex items-center justify-center transition-all ${
                 currentPage === totalPages
                   ? 'opacity-40 cursor-not-allowed text-[#94A3B8]'
                   : 'hover:bg-[#F8FAFC] active:scale-95 text-[#0F172A] cursor-pointer'
               }`}
             >
               <svg
-                width="16"
-                height="16"
+                width="24"
+                height="20"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="#0F172A"
