@@ -44,7 +44,7 @@ export default function Navbar() {
             <a href="#signin" className="font-satoshi text-[16px] font-thin text-white/95 hover:text-white transition-opacity">
               Sign In
             </a>
-            <a href="#join" className="font-satoshi text-[16px] font-thin text-white/95 hover:text-white transition-opacity">
+            <a href="/register" className="font-satoshi text-[16px] font-thin text-white/95 hover:text-white transition-opacity">
               Join Us
             </a>
             <a href="#cart" className="text-white/95 hover:text-white hover:scale-105 transition-all p-0.5" aria-label="Shopping Bag">
