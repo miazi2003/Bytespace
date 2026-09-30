@@ -9,7 +9,7 @@ export default function CreatorCTA() {
         <img
           src="/creatorCtaimage/Mask Group.png"
           alt=""
-          className="absolute -top-[30px] sm:top-[0px] -left-[20px] sm:-left-[30px] w-[140px] sm:w-[300px] object-contain -rotate-[0deg] opacity-95"
+          className="absolute top-[0px] sm:top-[0px] -left-[0px] sm:-left-[30px] w-[190px] sm:w-[300px] object-contain -rotate-[0deg] opacity-95"
         />
 
         {/* Top-Left White Squiggle */}
@@ -23,14 +23,14 @@ export default function CreatorCTA() {
         <img
           src="/creatorCtaimage/Cone (5).png"
           alt=""
-          className="absolute bottom-[60px] -left-[10px] sm:left-[0px] w-[80px] sm:w-[150px] object-contain opacity-95"
+          className="absolute bottom-[60px] -left-[00px] sm:left-[0px] w-[100px] sm:w-[150px] object-contain opacity-95"
         />
 
         {/* Bottom-Left Lime Torus Ring */}
         <img
           src="/creatorCtaimage/Cone (6).png"
           alt=""
-          className="absolute bottom-[50px] sm:bottom-[0px] left-[35px] sm:left-[45px] w-[150px] sm:w-[320px] object-contain opacity-95"
+          className="absolute bottom-[0px] sm:bottom-[0px] -left-[10px] sm:left-[45px] w-[190px] sm:w-[320px] object-contain opacity-95"
         />
 
         {/* Top-Right Lime Pyramid */}
@@ -51,7 +51,7 @@ export default function CreatorCTA() {
         <img
           src="/creatorCtaimage/Frame (11).png"
           alt=""
-          className="absolute -bottom-[45px] sm:bottom-[0px] right-[10px] sm:right-[15px] w-[140px] sm:w-[300px] object-contain opacity-95"
+          className="absolute -bottom-[0px] sm:bottom-[0px] -right-[30px] sm:right-[15px] w-[175px] sm:w-[300px] object-contain opacity-95"
         />
       </div>
 

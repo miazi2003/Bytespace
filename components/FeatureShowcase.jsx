@@ -25,7 +25,7 @@ const BULLET_POINTS = [
 
 export default function FeatureShowcase() {
   return (
-    <section className="relative w-full py-[120px] bg-white overflow-hidden flex flex-col gap-[140px]">
+    <section className="relative w-full py-[72px] lg:py-[120px] bg-white overflow-hidden flex flex-col lg:gap-[140px] gap-[70px]">
       {/* Unified Background Radial Gradient Ellipses (Single Canvas - Zero Seams) */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
         {/* Top-Left Lime Radial Gradient (Ellipse 11) */}
@@ -71,7 +71,7 @@ export default function FeatureShowcase() {
 
       {/* BLOCK 1: Professional Growth (Man & Course Card) */}
       <div className="relative z-10 w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-[60px]">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-[00px] lg:gap-[60px]">
           {/* Left Text & Stats Column */}
           <div className="w-full lg:w-1/2 flex flex-col items-start text-left">
             <h2 className="font-poppins font-semibold text-[32px] sm:text-[40px] lg:text-[44px] text-[#0F172A] leading-[1.18] mb-6">
@@ -82,28 +82,28 @@ export default function FeatureShowcase() {
             </p>
 
             {/* Stats Counter Row */}
-            <div className="flex items-center gap-8 sm:gap-12">
-              <div>
-                <span className="font-poppins font-bold text-[32px] sm:text-[36px] text-[#003BE2] leading-none block">
+            <div className="w-full flex items-center justify-center lg:justify-start gap-8 sm:gap-10 lg:gap-12 mx-auto lg:mx-0">
+              <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
+                <span className="font-poppins font-medium text-[40px] sm:text-[42px] lg:text-[36px] text-[#003BE2] leading-none block">
                   12K
                 </span>
-                <span className="font-satoshi text-[14px] text-[#82868E] mt-1.5 block">
+                <span className="font-satoshi text-[15px] sm:text-[16px] lg:text-[14px] text-[#82868E] mt-1.5 block">
                   Students
                 </span>
               </div>
-              <div>
-                <span className="font-poppins font-bold text-[32px] sm:text-[36px] text-[#003BE2] leading-none block">
+              <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
+                <span className="font-poppins font-medium text-[40px] sm:text-[42px] lg:text-[36px] text-[#003BE2] leading-none block">
                   70+
                 </span>
-                <span className="font-satoshi text-[14px] text-[#82868E] mt-1.5 block">
+                <span className="font-satoshi text-[15px] sm:text-[16px] lg:text-[14px] text-[#82868E] mt-1.5 block">
                   Courses
                 </span>
               </div>
-              <div>
-                <span className="font-poppins font-bold text-[32px] sm:text-[36px] text-[#003BE2] leading-none block">
+              <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
+                <span className="font-poppins font-medium text-[40px] sm:text-[42px] lg:text-[36px] text-[#003BE2] leading-none block">
                   16
                 </span>
-                <span className="font-satoshi text-[14px] text-[#82868E] mt-1.5 block">
+                <span className="font-satoshi text-[15px] sm:text-[16px] lg:text-[14px] text-[#82868E] mt-1.5 block">
                   Creators
                 </span>
               </div>
@@ -112,32 +112,39 @@ export default function FeatureShowcase() {
 
           {/* Right Composite Graphic Column */}
           <div className="w-full lg:w-1/2 flex items-center justify-center">
-            <div className="relative w-full max-w-[620px] h-[550px] sm:h-[580px]">
-              {/* Background Course Card (Exact CourseCard Component) */}
-              <div className="absolute top-2 left-0 sm:left-2 z-0 w-[320px] sm:w-[373px]">
+            <div className="relative w-full max-w-[420px] lg:max-w-[620px] h-[430px] sm:h-[520px] lg:h-[580px] overflow-visible">
+              {/* Background Course Card (Desktop Only - hidden on mobile) */}
+              <div className="hidden lg:block absolute top-2 left-0 sm:left-2 z-0 w-[320px] sm:w-[373px]">
                 <CourseCard course={FIGMA_COURSE} />
               </div>
 
-              {/* 3D Lime Doodle (Frame (8).png) */}
+              {/* Desktop 3D Lime Doodle (Frame (8).png) */}
               <img
                 src="/images/Frame (8).png"
                 alt=""
-                className="absolute top-6 sm:top-24 right-6 sm:-right-22 w-[150px] sm:w-[200px] object-contain z-22 select-none pointer-events-none"
+                className="hidden lg:block absolute top-6 sm:top-24 right-2 sm:-right-22 w-[120px] sm:w-[200px] object-contain z-22 select-none pointer-events-none"
               />
 
-              {/* Man Student Image (Layered over the CourseCard) */}
+              {/* Man Student Image (Large and Centered on Mobile) */}
               <img
                 src="/images/29a52a24e51266edcd7d57d73392ee5fc4833220.png"
                 alt="Student with laptop"
-                className="absolute bottom-0 left-[24%] sm:left-[3%] w-[390px] sm:w-[580px] max-w-none object-contain z-10 select-none pointer-events-none drop-shadow-2xl"
+                className="absolute bottom-0 left-40 -translate-x-1/2 lg:translate-x-0 lg:bottom-12 lg:left-[3%] w-[450px] sm:w-[420px] lg:w-[580px] max-w-none object-contain z-10 select-none pointer-events-none drop-shadow-2xl"
               />
 
-              {/* Floating Learning Progress Card (Foreground Right) */}
-              <div className="absolute bottom-12 sm:bottom-52 right-0 sm:-right-12 z-20 bg-white rounded-[24px] p-5 sm:p-6 shadow-[0_20px_50px_rgba(0,0,0,0.12)] border border-[#F1F5F9] w-[215px] sm:w-[240px]">
+              {/* Floating Learning Progress Card (Foreground on top of laptop with Doodle on Mobile) */}
+              <div className="absolute bottom-42 sm:bottom-6 left-[82%] -translate-x-1/2 lg:translate-x-0 lg:left-auto lg:bottom-52 lg:-right-12 z-20 bg-white rounded-[20px] sm:rounded-[24px] p-4 sm:p-6 shadow-[0_20px_50px_rgba(0,0,0,0.14)] border border-[#F1F5F9] w-[155px] sm:w-[240px]">
+                {/* Mobile Doodle: on top of the 55% card */}
+                <img
+                  src="/images/Frame (8).png"
+                  alt=""
+                  className="lg:hidden absolute -top-11 -right-4 w-[95px] sm:w-[110px] object-contain z-30 select-none pointer-events-none drop-shadow-md"
+                />
+
                 <span className="font-satoshi text-[13px] sm:text-[14px] font-medium text-[#475569] block mb-1">
                   Learning Progress
                 </span>
-                <span className="font-poppins font-bold text-[36px] sm:text-[40px] text-[#0F172A] leading-none block my-2">
+                <span className="font-poppins font-bold text-[34px] sm:text-[40px] text-[#0F172A] leading-none block my-2">
                   55%
                 </span>
                 <div className="w-full h-2.5 bg-[#F1F5F9] rounded-full overflow-hidden">
@@ -197,18 +204,18 @@ export default function FeatureShowcase() {
               <img
                 src="/images/testimage.png"
                 alt=""
-                className="absolute top-10 sm:top-18 right-6 sm:right-28 w-[150px] sm:w-[180px] object-contain z-20 select-none pointer-events-none"
+                className="absolute top-30 sm:top-18 -right-4 sm:right-28 w-[150px] sm:w-[180px] object-contain z-20 select-none pointer-events-none"
               />
 
               {/* Woman Instructor Image (Overlapping Blue Cards) */}
               <img
                 src="/images/0d6596fb1df66aaf843ee85722f439fada233946.png"
                 alt="Instructor with headset and tablet"
-                className="absolute bottom-0 left-[18%] sm:-left-[14%] w-[390px] sm:w-[600px] max-w-none object-contain z-10 select-none pointer-events-none drop-shadow-2xl"
+                className="absolute bottom-0 -left-[30%] sm:-left-[14%] w-[535px] sm:w-[600px] max-w-none object-contain z-10 select-none pointer-events-none drop-shadow-2xl"
               />
 
               {/* Card 3: Happy Students Card (Hero Block Matching) */}
-              <div className="absolute bg-white rounded-2xl shadow-[0_16px_36px_-4px_rgba(0,0,0,0.12),0_6px_16px_-4px_rgba(0,0,0,0.06)] z-20 text-left py-3 sm:py-3.5 px-3.5 sm:px-4.5 bottom-6 sm:bottom-26 right-0 sm:right-[14px] w-max max-w-[95%]">
+              <div className="absolute bg-white rounded-2xl shadow-[0_16px_36px_-4px_rgba(0,0,0,0.12),0_6px_16px_-4px_rgba(0,0,0,0.06)] z-20 text-left py-3 sm:py-3.5 px-3.5 sm:px-4.5 -bottom-11 sm:bottom-26 right-0 sm:right-[14px] w-max max-w-[95%]">
                 <div className="flex flex-col items-start justify-between gap-1 mb-2.5">
                   <span className="font-poppins font-medium text-[14px] sm:text-[16px] text-[#0F172A]">
                     Happy Students
