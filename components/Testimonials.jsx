@@ -1,4 +1,11 @@
+'use client';
+
 import React from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination, Navigation, Autoplay } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 
 const TESTIMONIALS = [
   {
@@ -29,7 +36,7 @@ const TESTIMONIALS = [
 
 export default function Testimonials() {
   return (
-    <section className="relative w-full py-[120px] bg-white overflow-hidden">
+    <section className="relative w-full py-[72px] bg-white overflow-hidden">
       {/* 3 Exact Background Radial Gradients from Figma Dev Mode */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
         {/* Ellipse 12: Lime Top-Center (w: 672px, h: 672px, top: -138px, left: 395px) */}
@@ -77,8 +84,8 @@ export default function Testimonials() {
           </p>
         </div>
 
-        {/* 3 Testimonial Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 justify-items-center">
+        {/* Desktop: 3 Testimonial Cards Grid (100% untouched) */}
+        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 justify-items-center">
           {TESTIMONIALS.map((t) => (
             <div
               key={t.id}
@@ -105,6 +112,99 @@ export default function Testimonials() {
               </p>
             </div>
           ))}
+        </div>
+
+        {/* Mobile: Swiper Carousel with smaller Navigation Buttons & Pagination */}
+        <div className="md:hidden w-full pb-2">
+          <Swiper
+            modules={[Pagination, Navigation, Autoplay]}
+            spaceBetween={16}
+            slidesPerView={1}
+            autoHeight={false}
+            navigation={{
+              prevEl: '.testimonial-prev',
+              nextEl: '.testimonial-next',
+            }}
+            pagination={{
+              el: '.testimonial-pagination',
+              clickable: true,
+            }}
+            autoplay={{
+              delay: 4500,
+              disableOnInteraction: false,
+            }}
+            loop={true}
+            className="w-full"
+          >
+            {TESTIMONIALS.map((t) => (
+              <SwiperSlide key={t.id} className="flex justify-center">
+                <div className="w-full max-w-[340px] sm:max-w-[360px] min-h-[380px] bg-white rounded-[24px] p-6 shadow-[0_10px_35px_rgba(0,0,0,0.04)] flex flex-col justify-start border-none mx-auto">
+                  {/* Author Image */}
+                  <img
+                    src={t.image}
+                    alt={t.name}
+                    className="w-[72px] h-[72px] rounded-full object-cover bg-slate-100 mb-4"
+                  />
+
+                  {/* Author Details */}
+                  <h3 className="font-poppins font-semibold text-[19px] text-[#0F172A] leading-snug">
+                    {t.name}
+                  </h3>
+                  <span className="font-satoshi font-medium text-[14px] text-[#003BE2] mt-0.5 block">
+                    {t.role}
+                  </span>
+
+                  {/* Review Description */}
+                  <p className="font-satoshi text-[15px] text-[#475569] leading-relaxed mt-3">
+                    {t.quote}
+                  </p>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+
+          {/* Controls: Smaller Navigation Buttons & Pagination */}
+          <div className="flex items-center justify-center gap-4 mt-6">
+            <button
+              type="button"
+              aria-label="Previous Testimonial"
+              className="testimonial-prev w-9 h-9 rounded-full bg-white border border-[#E2E8F0] shadow-sm flex items-center justify-center text-[#0F172A] hover:bg-[#F5F5F6] active:scale-95 transition-all cursor-pointer"
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+
+            <div className="testimonial-pagination flex items-center justify-center !w-auto"></div>
+
+            <button
+              type="button"
+              aria-label="Next Testimonial"
+              className="testimonial-next w-9 h-9 rounded-full bg-white border border-[#E2E8F0] shadow-sm flex items-center justify-center text-[#0F172A] hover:bg-[#F5F5F6] active:scale-95 transition-all cursor-pointer"
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
     </section>

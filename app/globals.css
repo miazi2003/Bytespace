@@ -65,3 +65,17 @@
 .animate-reveal-fade {
   animation: revealFade 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+
+.swiper-pagination-bullet {
+  background: #CBD5E1 !important;
+  opacity: 1 !important;
+  width: 8px !important;
+  height: 8px !important;
+  transition: all 0.3s ease !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: #003BE2 !important;
+  width: 24px !important;
+  border-radius: 9999px !important;
+}
