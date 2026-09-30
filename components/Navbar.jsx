@@ -9,7 +9,7 @@ export default function Navbar() {
     <header className="w-full h-auto lg:h-[120px] flex items-center pt-6 pb-4 lg:py-0 relative z-30">
       <div className="w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
         <nav className="flex items-center justify-between relative" aria-label="Main Navigation">
-          <a href="#" className="flex items-center gap-2.5 select-none focus:outline-none">
+          <a href="/" className="flex items-center gap-2.5 select-none focus:outline-none">
             <img 
               src="/logo.png" 
               alt="ByteSpace Icon" 
@@ -24,17 +24,17 @@ export default function Navbar() {
 
           <ul className="hidden md:flex items-center gap-9 absolute left-1/2 -translate-x-1/2 list-none">
             <li>
-              <a href="#home" className="font-satoshi text-[16px] font-thin text-white/95 hover:text-white transition-opacity">
+              <a href="/" className="font-satoshi text-[16px] font-thin text-white/95 hover:text-white transition-opacity">
                 Home
               </a>
             </li>
             <li>
-              <a href="#courses" className="font-satoshi text-[16px] font-thin text-white/95 hover:text-white transition-opacity">
+              <a href="/courses" className="font-satoshi text-[16px] font-thin text-white/95 hover:text-white transition-opacity">
                 Courses
               </a>
             </li>
             <li>
-              <a href="#creators" className="font-satoshi text-[16px] font-thin text-white/95 hover:text-white transition-opacity">
+              <a href="/#creators" className="font-satoshi text-[16px] font-thin text-white/95 hover:text-white transition-opacity">
                 Creators
               </a>
             </li>
@@ -81,20 +81,20 @@ export default function Navbar() {
 
       {mobileMenuOpen && (
         <div className="md:hidden fixed top-[68px] left-0 w-full bg-[#0047df] px-8 py-6 shadow-2xl flex flex-col gap-4 z-50 border-t border-white/10">
-          <a href="#home" onClick={() => setMobileMenuOpen(false)} className="font-satoshi text-[17px] font-thin text-white hover:text-[#D5FF00]">
+          <a href="/" onClick={() => setMobileMenuOpen(false)} className="font-satoshi text-[17px] font-thin text-white hover:text-[#D5FF00]">
             Home
           </a>
-          <a href="#courses" onClick={() => setMobileMenuOpen(false)} className="font-satoshi text-[17px] font-thin text-white hover:text-[#D5FF00]">
+          <a href="/courses" onClick={() => setMobileMenuOpen(false)} className="font-satoshi text-[17px] font-thin text-white hover:text-[#D5FF00]">
             Courses
           </a>
-          <a href="#creators" onClick={() => setMobileMenuOpen(false)} className="font-satoshi text-[17px] font-thin text-white hover:text-[#D5FF00]">
+          <a href="/#creators" onClick={() => setMobileMenuOpen(false)} className="font-satoshi text-[17px] font-thin text-white hover:text-[#D5FF00]">
             Creators
           </a>
           <hr className="border-white/15 my-1" />
-          <a href="#signin" onClick={() => setMobileMenuOpen(false)} className="font-satoshi text-[17px] font-thin text-white hover:text-[#D5FF00]">
+          <a href="/login" onClick={() => setMobileMenuOpen(false)} className="font-satoshi text-[17px] font-thin text-white hover:text-[#D5FF00]">
             Sign In
           </a>
-          <a href="#join" onClick={() => setMobileMenuOpen(false)} className="font-satoshi text-[17px] font-thin text-white hover:text-[#D5FF00]">
+          <a href="/register" onClick={() => setMobileMenuOpen(false)} className="font-satoshi text-[17px] font-thin text-white hover:text-[#D5FF00]">
             Join Us
           </a>
         </div>
