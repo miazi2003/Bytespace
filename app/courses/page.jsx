@@ -803,14 +803,14 @@ export default function CoursesPage() {
             </div>
           </div>
 
-          {/* Category Filter Pills: All 9 in one line on desktop */}
-          <div className="w-full flex flex-wrap lg:flex-nowrap items-center justify-between gap-1.5 sm:gap-2 lg:gap-2.5 mb-8">
+          {/* Category Filter Pills: Neatly aligned with consistent gap on all screen sizes */}
+          <div className="w-full flex flex-wrap items-center justify-start gap-2 sm:gap-2.5 lg:gap-3 mb-8">
             {CATEGORIES.map((cat) => (
               <button
                 key={cat}
                 type="button"
                 onClick={() => handleCategorySelect(cat)}
-                className={`font-satoshi text-[14px] lg:text-[15px] font-medium px-3 sm:px-3.5 lg:px-4 py-2 lg:py-2.5 rounded-full whitespace-nowrap transition-colors duration-150 cursor-pointer ${
+                className={`font-satoshi text-[14px] lg:text-[15px] font-medium px-4 py-2 lg:py-2.5 rounded-full whitespace-nowrap transition-colors duration-150 cursor-pointer ${
                   activeCategory === cat
                     ? 'bg-[#D4FB20] text-[#0F172A]'
                     : 'bg-[#F5F5F6] text-[#475569] hover:bg-[#EAEAEA]'

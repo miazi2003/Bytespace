@@ -34,7 +34,7 @@ const NAV_COLUMNS = [
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-white pt-[70px] pb-[48px] flex flex-col justify-between">
+    <footer className="w-full bg-white border-t border-[#E5E7EB] pt-[70px] pb-[48px] flex flex-col justify-between">
       <div className="w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Footer Top Section */}
         <div className="flex flex-col lg:flex-row justify-between items-start gap-12 lg:gap-[90px]">
