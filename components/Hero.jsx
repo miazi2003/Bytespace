@@ -78,7 +78,7 @@ export default function Hero() {
         <img 
           src="/images/Ellipse 7.png" 
           alt="" 
-          className="absolute -bottom-[30px] sm:-bottom-[80px] left-1/2 -translate-x-1/2 w-[520px] sm:w-[780px] md:w-[1140px] lg:w-[1480px] max-w-full h-auto z-[2] lg:z-[1] select-none pointer-events-none" 
+          className="absolute -bottom-[30px] sm:-bottom-[80px] left-1/2 -translate-x-1/2 w-[520px] sm:w-[780px] md:w-[1020px] lg:w-[1240px] max-w-full lg:max-w-[1240px] h-auto z-[2] lg:z-[1] select-none pointer-events-none" 
         />
 
         {/* Round Element (Cone 2): under man, above green ellipse */}

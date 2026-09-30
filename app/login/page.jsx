@@ -52,7 +52,7 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="relative w-full min-h-screen lg:h-screen lg:max-h-screen bg-[#0052FE] bg-grid-pattern flex flex-col justify-between overflow-x-hidden lg:overflow-hidden">
+        <div className="relative w-full min-h-screen lg:h-screen lg:max-h-screen bg-[#003BE2] bg-grid-pattern flex flex-col justify-between overflow-x-hidden lg:overflow-hidden">
             {/* Header: Logo Only, Exact Height 120px on Desktop */}
             <header className="w-full h-[80px] sm:h-[100px] lg:h-[120px] flex items-center relative z-30 shrink-0">
                 <div className="w-full max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-[120px] flex items-center">

@@ -7,7 +7,7 @@ export default function Navbar() {
 
   return (
     <header className="w-full h-auto lg:h-[120px] flex items-center pt-6 pb-4 lg:py-0 relative z-30">
-      <div className="w-full px-6 sm:px-10 lg:px-[120px]">
+      <div className="w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
         <nav className="flex items-center justify-between relative" aria-label="Main Navigation">
           <a href="#" className="flex items-center gap-2.5 select-none focus:outline-none">
             <img 
@@ -48,9 +48,9 @@ export default function Navbar() {
               Join Us
             </a>
             <a href="#cart" className="text-white/95 hover:text-white hover:scale-105 transition-all p-0.5" aria-label="Shopping Bag">
-              <svg width="20" height="22" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M3.5 6.5H16.5L18 20.5H2L3.5 6.5Z" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                <path d="M6.5 8.5V4.5C6.5 2.84315 7.84315 1.5 9.5 1.5H10.5C12.1569 1.5 13.5 2.84315 13.5 4.5V8.5" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="3.5" y="7" width="17" height="14" rx="2.5" />
+                <path d="M8 9.5V5a4 4 0 0 1 8 0v4.5" />
               </svg>
             </a>
           </div>
