@@ -79,10 +79,10 @@ export default function CourseCard({ course }) {
                 key={idx}
                 src={av}
                 alt="Student"
-                className="w-[45px] h-[45px] rounded-full border-2 border-white object-cover bg-slate-200 -ml-2 first:ml-0 flex-shrink-0"
+                className="sm:w-[45px] sm:h-[45px]  w-[32px] h-[32px] rounded-full border-2 border-white object-cover bg-slate-200 -ml-2 first:ml-0 flex-shrink-0"
               />
             ))}
-            <div className="w-[45px] h-[45px] rounded-full bg-[#000000] border-2 border-white -ml-2 flex items-center justify-center font-poppins font-bold text-[11px] text-[#ffffff] flex-shrink-0">
+            <div className="sm:w-[45px] sm:h-[45px]  w-[32px] h-[32px] rounded-full bg-[#000000] border-2 border-white -ml-2 flex items-center justify-center font-poppins font-bold text-[11px] text-[#ffffff] flex-shrink-0">
               {studentCount}
             </div>
           </div>

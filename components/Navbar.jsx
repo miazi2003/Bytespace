@@ -41,7 +41,7 @@ export default function Navbar() {
           </ul>
 
           <div className="hidden md:flex items-center gap-7">
-            <a href="#signin" className="font-satoshi text-[16px] font-thin text-white/95 hover:text-white transition-opacity">
+            <a href="/login" className="font-satoshi text-[16px] font-thin text-white/95 hover:text-white transition-opacity">
               Sign In
             </a>
             <a href="/register" className="font-satoshi text-[16px] font-thin text-white/95 hover:text-white transition-opacity">
