@@ -117,8 +117,15 @@ const ROW_3_CATEGORIES = [
   'Cooking',
 ];
 
+const ALL_CATEGORIES = [
+  ...ROW_1_CATEGORIES,
+  ...ROW_2_CATEGORIES,
+  ...ROW_3_CATEGORIES,
+];
+
 export default function ExploreCourses() {
   const [activeCategory, setActiveCategory] = useState('Featured');
+  const [showAllMobile, setShowAllMobile] = useState(false);
 
   return (
     <section className="w-full py-[72px] bg-white flex flex-col">
@@ -133,8 +140,8 @@ export default function ExploreCourses() {
           </p>
         </div>
 
-        {/* Filter Buttons Section */}
-        <div className="w-full flex flex-col gap-3 mb-12">
+        {/* Filter Buttons Section: Desktop (100% untouched) */}
+        <div className="hidden md:flex w-full flex-col gap-3 mb-12">
           <div className="w-full flex flex-wrap items-center justify-center gap-[16px]">
             {ROW_1_CATEGORIES.map((cat) => (
               <button
@@ -191,6 +198,36 @@ export default function ExploreCourses() {
               + More
             </button>
           </div>
+        </div>
+
+        {/* Filter Buttons Section: Mobile (Inline 2 balanced lines, expandable with smooth fade) */}
+        <div className="flex md:hidden w-full flex-wrap items-center justify-center gap-2 sm:gap-3 mb-10 transition-all duration-300">
+          {(showAllMobile ? ALL_CATEGORIES : ALL_CATEGORIES.slice(0, 6)).map((cat, idx) => {
+            const isExtra = idx >= 6;
+            return (
+              <button
+                key={cat}
+                type="button"
+                onClick={() => setActiveCategory(cat)}
+                className={`font-satoshi text-[14px] sm:text-[15px] font-medium px-4 py-2 rounded-full transition-all duration-200 cursor-pointer ${
+                  isExtra ? 'animate-reveal-fade' : ''
+                } ${
+                  activeCategory === cat
+                    ? 'bg-[#D4FB20] text-[#0F172A]'
+                    : 'bg-[#F5F5F6] text-[#475569] hover:bg-[#EAEAEA]'
+                }`}
+              >
+                {cat}
+              </button>
+            );
+          })}
+          <button
+            type="button"
+            onClick={() => setShowAllMobile(!showAllMobile)}
+            className="font-satoshi text-[14px] sm:text-[15px] font-medium text-[#003BE2] hover:underline px-3 py-2 cursor-pointer flex items-center gap-1 transition-all"
+          >
+            {showAllMobile ? '- Less' : '+ More'}
+          </button>
         </div>
 
         {/* Cards Grid */}

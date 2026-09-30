@@ -53,12 +53,12 @@ export default function LearningPaths() {
           </p>
         </div>
 
-        {/* Categories Icon Container */}
-        <div className="w-full flex items-center justify-center gap-6 lg:gap-[40px]">
+        {/* Categories Icon Container: 2 columns on mobile, single flex row on desktop */}
+        <div className="w-full grid grid-cols-2 sm:grid-cols-3 lg:flex lg:items-center lg:justify-center justify-items-center gap-4 sm:gap-6 lg:gap-[40px]">
           {CATEGORIES.map((cat) => (
             <div
               key={cat.id}
-              className="w-[167px] h-[167px] bg-white rounded-[24px] border border-[#CED0D3] flex flex-col items-center justify-center gap-3 shadow-[0_2px_12px_rgba(0,0,0,0.02)]"
+              className="w-full max-w-[167px] h-[167px] bg-white rounded-[24px] border border-[#CED0D3] flex flex-col items-center justify-center gap-3 shadow-[0_2px_12px_rgba(0,0,0,0.02)] transition-transform hover:-translate-y-1 duration-200"
             >
               <div className="w-[60px] h-[60px] rounded-full bg-[#D4FB20] flex items-center justify-center flex-shrink-0">
                 <img
@@ -67,7 +67,7 @@ export default function LearningPaths() {
                   className="w-[28px] h-[28px] object-contain"
                 />
               </div>
-              <span className="font-poppins font-medium text-[20px] text-[#0F172A] text-center leading-tight">
+              <span className="font-poppins font-medium text-[17px] sm:text-[20px] text-[#0F172A] text-center leading-tight px-2">
                 {cat.name}
               </span>
             </div>
