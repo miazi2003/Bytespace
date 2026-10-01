@@ -16,6 +16,7 @@ export default function CoursesPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [isMobile, setIsMobile] = useState(false);
 
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isLevelOpen, setIsLevelOpen] = useState(false);
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [isSortOpen, setIsSortOpen] = useState(false);
@@ -156,6 +157,8 @@ export default function CoursesPage() {
             searchTerm={searchTerm}
             setSearchTerm={setSearchTerm}
             setCurrentPage={setCurrentPage}
+            isFilterOpen={isFilterOpen}
+            setIsFilterOpen={setIsFilterOpen}
             isLevelOpen={isLevelOpen}
             setIsLevelOpen={setIsLevelOpen}
             isCategoryOpen={isCategoryOpen}
