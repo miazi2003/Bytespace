@@ -5,610 +5,733 @@ import Link from 'next/link';
 import { notFound, useParams } from 'next/navigation';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
-import CourseCard from '../../../components/CourseCard';
-import { getCourseById, getRelatedCourses } from '../../../data/coursesData';
+import { getCourseById } from '../../../data/coursesData';
 
 export default function CourseDetailsPage(props) {
-  // Support both props.params (async or direct) and useParams hook
   const routeParams = useParams();
-  const rawId = routeParams?.id || (props?.params ? (typeof props.params.then === 'function' ? use(props.params)?.id : props.params?.id) : null);
-  
+  const rawId =
+    routeParams?.id ||
+    (props?.params
+      ? typeof props.params.then === 'function'
+        ? use(props.params)?.id
+        : props.params?.id
+      : null);
+
   const course = getCourseById(rawId);
 
   if (!course) {
     notFound();
   }
 
-  const relatedCourses = getRelatedCourses(course, 3);
-
   // Interactive UI states
-  const [activeTab, setActiveTab] = useState('overview');
-  const [expandedModules, setExpandedModules] = useState({ 0: true, 1: true });
-  const [isWishlisted, setIsWishlisted] = useState(false);
+  const [activeTab, setActiveTab] = useState('about');
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
-  const [addedToCart, setAddedToCart] = useState(false);
+  const [isEnrolled, setIsEnrolled] = useState(false);
+  const [copiedShare, setCopiedShare] = useState(false);
 
-  const toggleModule = (idx) => {
-    setExpandedModules((prev) => ({
-      ...prev,
-      [idx]: !prev[idx],
-    }));
-  };
-
-  const scrollToSection = (id, tabKey) => {
-    setActiveTab(tabKey);
-    const element = document.getElementById(id);
-    if (element) {
-      const yOffset = -100;
-      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      window.scrollTo({ top: y, behavior: 'smooth' });
+  const handleShare = () => {
+    if (typeof window !== 'undefined' && navigator.clipboard) {
+      navigator.clipboard.writeText(window.location.href);
+      setCopiedShare(true);
+      setTimeout(() => setCopiedShare(false), 2500);
     }
   };
 
   return (
-    <div className="relative w-full min-h-screen flex flex-col bg-[#F8FAFC]">
-      {/* Top Header / Hero Section: Deep Blue #003BE2 with Grid Pattern */}
-      <div className="relative w-full bg-[#003BE2] bg-grid-pattern flex flex-col overflow-hidden pb-12 lg:pb-16">
+    <div className="relative w-full min-h-screen flex flex-col bg-white overflow-x-hidden">
+      {/* Top Hero Section: Background #003BE2 with Grid Pattern, Tight bottom spacing */}
+      <section className="relative w-full bg-[#003BE2] bg-grid-pattern pb-8 lg:pb-10 flex flex-col justify-start">
+        {/* Navbar */}
         <Navbar />
 
-        <div className="w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 relative z-20">
-          {/* Breadcrumb Navigation */}
-          <nav className="flex items-center flex-wrap gap-2 text-[13px] font-satoshi text-white/70 mb-6">
-            <Link href="/" className="hover:text-white transition-colors">
-              Home
-            </Link>
-            <span>/</span>
-            <Link href="/courses" className="hover:text-white transition-colors">
-              Courses
-            </Link>
-            <span>/</span>
-            <span className="text-white/90">{course.category}</span>
-            <span>/</span>
-            <span className="text-white font-medium truncate max-w-[240px] sm:max-w-none">
-              {course.title}
-            </span>
-          </nav>
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-            {/* Hero Left Content */}
-            <div className="lg:col-span-8 flex flex-col">
-              {/* Category & Level Badges */}
-              <div className="flex items-center gap-2.5 mb-4">
-                <span className="px-3.5 py-1 rounded-full bg-white/15 text-white backdrop-blur-md text-[12px] font-satoshi font-medium border border-white/20">
-                  {course.category}
-                </span>
-                <span className="px-3.5 py-1 rounded-full bg-[#D5FF00] text-[#0F172A] text-[12px] font-satoshi font-semibold">
-                  {course.level}
-                </span>
-              </div>
-
-              {/* Course Main Title */}
-              <h1 className="font-poppins font-bold text-[28px] sm:text-[38px] lg:text-[44px] text-white leading-[1.2] mb-4">
-                {course.title}
+        {/* Hero Content Container: Max Width 1240px */}
+        <div className="w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 relative z-20">
+          
+          {/* Header Row: Title & Share Button */}
+          <div className="w-full flex flex-col md:flex-row md:items-start justify-between gap-4 mb-2">
+            <div className="flex-1 max-w-[880px]">
+              {/* Main Heading: 36px font-semibold */}
+              <h1 className="font-poppins font-semibold text-[26px] sm:text-[32px] lg:text-[36px] text-white leading-[1.2]">
+                {course.title}: A Comprehensive Guide
               </h1>
 
-              {/* Tagline / Subtitle */}
-              <p className="font-satoshi text-[16px] sm:text-[18px] text-white/85 leading-relaxed mb-6 max-w-[720px]">
-                {course.overview}
+              {/* Description: 20px with 10px gap between heading & description */}
+              <p className="font-satoshi text-[16px] sm:text-[18px] lg:text-[20px] text-white/95 leading-relaxed mt-[10px]">
+                Unlock the Power of Digital Creation with Expert Guidance
               </p>
 
-              {/* Rating & Social Proof Meta */}
-              <div className="flex flex-wrap items-center gap-y-3 gap-x-6 text-[14px] font-satoshi text-white/90 border-t border-white/15 pt-5">
-                <div className="flex items-center gap-1.5">
-                  <span className="font-poppins font-bold text-[16px] text-[#D5FF00]">{course.rating}</span>
-                  <div className="flex items-center text-[#D5FF00]">
-                    {[...Array(5)].map((_, i) => (
-                      <svg key={i} className="w-4 h-4 fill-current" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                      </svg>
-                    ))}
-                  </div>
-                  <span className="text-white/70">({course.reviewsCount})</span>
+              {/* Instructor Line */}
+              <p className="font-satoshi text-[15px] text-white mt-2">
+                <span className="text-white/80">by </span>
+                <span className="text-[#D5FF00] font-medium">{course.instructor}</span>
+              </p>
+
+              {/* 3 Information Capsules: Padding 8px 24px, Radius 24px */}
+              <div className="flex flex-wrap items-center gap-3 sm:gap-4 mt-5">
+                {/* Intermediate / Level Capsule */}
+                <div className="bg-white text-[#0F172A] font-satoshi font-medium text-[14px] px-[24px] py-[8px] rounded-[24px] flex items-center gap-2 shadow-sm">
+                  <img
+                    src="/courseDetailsIcon/Vector (10).png"
+                    alt="Level"
+                    className="w-[15px] h-[16px] object-contain flex-shrink-0"
+                  />
+                  <span>{course.level || 'Intermediate'}</span>
                 </div>
 
-                <div className="flex items-center gap-2">
-                  <svg className="w-4 h-4 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                  </svg>
-                  <span>{course.enrolledCount}</span>
+                {/* Rating Capsule */}
+                <div className="bg-white text-[#0F172A] font-satoshi font-medium text-[14px] px-[24px] py-[8px] rounded-[24px] flex items-center gap-2 shadow-sm">
+                  <img
+                    src="/courseDetailsIcon/Vector (11).png"
+                    alt="Rating"
+                    className="w-[16px] h-[16px] object-contain flex-shrink-0"
+                  />
+                  <span>{course.rating} ({course.comments || '172 reviews'})</span>
                 </div>
 
-                <div className="flex items-center gap-2">
-                  <svg className="w-4 h-4 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span>Last updated {course.lastUpdated}</span>
-                </div>
-
-                <div className="flex items-center gap-2">
-                  <svg className="w-4 h-4 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
-                  </svg>
-                  <span>{course.language}</span>
-                </div>
-              </div>
-
-              {/* Instructor Capsule in Hero */}
-              <div className="flex items-center gap-3 mt-6">
-                <img
-                  src={course.instructorAvatar}
-                  alt={course.instructor}
-                  className="w-11 h-11 rounded-full object-cover border-2 border-white/40 shadow-sm"
-                />
-                <div>
-                  <p className="text-[12px] font-satoshi text-white/70">Created by</p>
-                  <p className="text-[15px] font-poppins font-semibold text-white">
-                    {course.instructor}
-                  </p>
+                {/* Students Count Capsule */}
+                <div className="bg-white text-[#0F172A] font-satoshi font-medium text-[14px] px-[24px] py-[8px] rounded-[24px] flex items-center gap-2 shadow-sm">
+                  <img
+                    src="/courseDetailsIcon/Vector (12).png"
+                    alt="Students"
+                    className="w-[22px] h-[16px] object-contain flex-shrink-0"
+                  />
+                  <span>199 Students</span>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
 
-      {/* Sticky Tab Navigation Bar */}
-      <div className="sticky top-0 z-30 bg-white border-b border-[#E2E8F0] shadow-sm">
-        <div className="w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-          <div className="flex items-center gap-2 sm:gap-6 overflow-x-auto py-3 no-scrollbar">
-            {[
-              { id: 'overview-sec', key: 'overview', label: 'Overview' },
-              { id: 'learn-sec', key: 'learn', label: "What You'll Learn" },
-              { id: 'curriculum-sec', key: 'curriculum', label: 'Curriculum' },
-              { id: 'instructor-sec', key: 'instructor', label: 'Instructor' },
-              { id: 'reviews-sec', key: 'reviews', label: 'Reviews' },
-            ].map((tab) => (
-              <button
-                key={tab.key}
-                onClick={() => scrollToSection(tab.id, tab.key)}
-                className={`font-satoshi text-[14px] sm:text-[15px] font-medium whitespace-nowrap pb-2 border-b-2 transition-all cursor-pointer ${
-                  activeTab === tab.key
-                    ? 'border-[#003BE2] text-[#003BE2] font-semibold'
-                    : 'border-transparent text-[#64748B] hover:text-[#0F172A]'
-                }`}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Main Body Container: 2-Column Grid */}
-      <main className="w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-          
-          {/* Left Column: Detailed Content (8 cols) */}
-          <div className="lg:col-span-8 flex flex-col gap-10">
-
-            {/* Video / Visual Course Preview Hero Box */}
-            <div className="relative w-full h-[240px] sm:h-[360px] lg:h-[400px] rounded-[24px] overflow-hidden bg-slate-900 border border-[#E5E7EB] shadow-[0_8px_30px_rgba(0,0,0,0.06)] group">
+            {/* Share Button (Top Right in Hero) */}
+            <button
+              onClick={handleShare}
+              className="self-start md:self-auto bg-[#D5FF00] hover:bg-[#C4EC00] active:scale-95 text-[#0F172A] font-satoshi font-medium text-[14px] px-5 py-2 rounded-full flex items-center gap-2 transition-all cursor-pointer shadow-sm flex-shrink-0"
+              aria-label="Share Course"
+            >
               <img
-                src={course.image}
-                alt={course.title}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80"
+                src="/courseDetailsIcon/Vector (13).png"
+                alt="Share"
+                className="w-[18px] h-[18px] object-contain flex-shrink-0"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-between p-6">
-                <div className="flex justify-end">
-                  <span className="bg-black/60 backdrop-blur-md px-3.5 py-1.5 rounded-full text-white text-[12px] font-satoshi font-medium border border-white/20">
-                    Preview Mode
+              <span>{copiedShare ? 'Link Copied!' : 'Share'}</span>
+            </button>
+          </div>
+
+          {/* Main Visual Row: Video Block (Left 720px x 479px) & Enroll Block (Right 412px x 956px) */}
+          <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mt-8 lg:mt-10 relative">
+            
+            {/* Left Video Block: Width 720px on desktop, Height 479px, Radius 24px */}
+            <div className="lg:col-span-8 w-full lg:w-[720px] max-w-[720px] h-[260px] sm:h-[380px] lg:h-[479px] rounded-[24px] overflow-hidden bg-slate-900 relative shadow-[0_20px_50px_rgba(0,0,0,0.2)] group flex-shrink-0">
+              <img
+                src="/courseDetailsIcon/71d7929ee0ecb2198c9955a8e842f4991dcb4655.jpg"
+                alt="Course Video Preview"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                onError={(e) => {
+                  e.currentTarget.src = course.image;
+                }}
+              />
+              
+              {/* Play Button Overlay: Squircle glassmorphic container matching reference image */}
+              <div className="absolute inset-0 bg-black/10 flex items-center justify-center p-4">
+                <button
+                  onClick={() => setIsVideoModalOpen(true)}
+                  className="w-[82px] h-[82px] sm:w-[96px] sm:h-[96px] rounded-[24px] sm:rounded-[28px] bg-black/45 hover:bg-black/60 backdrop-blur-md border border-white/25 flex items-center justify-center shadow-2xl hover:scale-105 active:scale-95 transition-all cursor-pointer"
+                  aria-label="Play Video"
+                >
+                  <img
+                    src="/courseDetailsIcon/Vector (9).png"
+                    alt="Play"
+                    className="w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] object-contain drop-shadow"
+                  />
+                </button>
+              </div>
+            </div>
+
+            {/* Right Enroll Block: Width 412px on desktop, Min-Height 956px, Padding 40px, Radius 24px */}
+            {/* Sits right at the top of the video block and extends down across the blue/white threshold */}
+            <div className="lg:col-span-4 w-full lg:w-[412px] max-w-[412px] lg:min-h-[956px] bg-white rounded-[24px] p-6 sm:p-8 lg:p-[40px] shadow-[0_16px_48px_rgba(0,0,0,0.12)] border border-[#E5E7EB] flex flex-col justify-between relative z-30 lg:absolute lg:right-0 lg:top-0">
+              
+              <div>
+                {/* Lessons Header */}
+                <h3 className="font-poppins font-semibold text-[18px] sm:text-[20px] text-[#0F172A] mb-5">
+                  112 Lessons (24 hours)
+                </h3>
+
+                {/* Lesson Preview Rows */}
+                <div className="flex flex-col gap-[14px]">
+                  <div className="flex items-center justify-between text-[14px]">
+                    <div className="flex items-center gap-2.5">
+                      <span className="font-poppins font-semibold text-[#64748B]">01</span>
+                      <span className="font-satoshi text-[#0F172A] font-medium text-[16px]">
+                        Introduction to Digital Assets
+                      </span>
+                    </div>
+                    <span className="font-satoshi font-medium text-[#003BE2] text-[13px] flex-shrink-0">
+                      12 mins
+                    </span>
+                  </div>
+
+                  <div className="flex items-center justify-between text-[14px]">
+                    <div className="flex items-center gap-2.5">
+                      <span className="font-poppins font-semibold text-[#64748B]">02</span>
+                      <span className="font-satoshi text-[#0F172A] font-medium text-[16px]">
+                        Design Principles for Impacts
+                      </span>
+                    </div>
+                    <span className="font-satoshi font-medium text-[#003BE2] text-[13px] flex-shrink-0">
+                      21 mins
+                    </span>
+                  </div>
+
+                  <div className="flex items-center justify-between text-[14px]">
+                    <div className="flex items-center gap-2.5">
+                      <span className="font-poppins font-semibold text-[#64748B]">03</span>
+                      <span className="font-satoshi text-[#0F172A] font-medium text-[16px]">
+                        Advanced Techniques in Digital Creation
+                      </span>
+                    </div>
+                    <span className="font-satoshi font-medium text-[#003BE2] text-[13px] flex-shrink-0">
+                      16 mins
+                    </span>
+                  </div>
+
+                  <p className="font-satoshi text-[13px] text-[#82868E] mt-1">
+                    99 more videos
+                  </p>
+                </div>
+
+                {/* Callout Message */}
+                <p className="font-satoshi text-[13px] sm:text-[16px] text-[#64748B] leading-relaxed mt-6 mb-3">
+                  Ready to Dive In? Enroll Now and Start Building Your Digital Future!
+                </p>
+
+                {/* Price Display */}
+                <div className="flex items-baseline gap-1 my-2">
+                  <span className="font-poppins font-semibold text-[32px] sm:text-[36px] text-[#003BE2]">
+                    {course.price || '$25'}
+                  </span>
+                  <span className="font-satoshi text-[14px] text-[#82868E]">
+                    {course.period || '/lifetime'}
                   </span>
                 </div>
 
-                <div className="flex items-center gap-4">
-                  <button
-                    onClick={() => setIsVideoModalOpen(true)}
-                    className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#D5FF00] hover:bg-[#C4EC00] active:scale-95 flex items-center justify-center text-[#0F172A] shadow-lg transition-all cursor-pointer group-hover:scale-110"
-                    aria-label="Play course preview"
-                  >
-                    <svg className="w-6 h-6 sm:w-7 sm:h-7 translate-x-0.5 fill-current" viewBox="0 0 24 24">
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
-                  </button>
-                  <div>
-                    <h3 className="text-white font-poppins font-semibold text-[18px] sm:text-[20px]">
-                      Preview this course
-                    </h3>
-                    <p className="text-white/80 font-satoshi text-[13px] sm:text-[14px]">
-                      Free sample lesson included ({course.duration})
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Section: What You Will Learn */}
-            <section id="learn-sec" className="bg-white rounded-[24px] border border-[#E5E7EB] p-6 sm:p-8 shadow-sm">
-              <h2 className="font-poppins font-bold text-[22px] sm:text-[24px] text-[#0F172A] mb-6 flex items-center gap-2.5">
-                <span className="w-2.5 h-6 bg-[#003BE2] rounded-full inline-block"></span>
-                What you will learn
-              </h2>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {course.whatYouWillLearn.map((item, idx) => (
-                  <div key={idx} className="flex items-start gap-3">
-                    <div className="w-6 h-6 rounded-full bg-[#EBF0FF] text-[#003BE2] flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
-                      </svg>
-                    </div>
-                    <p className="font-satoshi text-[15px] text-[#334155] leading-relaxed">
-                      {item}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </section>
-
-            {/* Section: Course Curriculum */}
-            <section id="curriculum-sec" className="bg-white rounded-[24px] border border-[#E5E7EB] p-6 sm:p-8 shadow-sm">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6">
-                <div>
-                  <h2 className="font-poppins font-bold text-[22px] sm:text-[24px] text-[#0F172A] flex items-center gap-2.5">
-                    <span className="w-2.5 h-6 bg-[#003BE2] rounded-full inline-block"></span>
-                    Course Content
-                  </h2>
-                  <p className="font-satoshi text-[13px] text-[#64748B] mt-1">
-                    {course.curriculum.length} modules • {course.lessons} • {course.duration} total length
-                  </p>
-                </div>
-
+                {/* Enroll Now Button */}
                 <button
                   onClick={() => {
-                    const allOpen = Object.keys(expandedModules).length === course.curriculum.length;
-                    if (allOpen) {
-                      setExpandedModules({});
-                    } else {
-                      const all = {};
-                      course.curriculum.forEach((_, i) => {
-                        all[i] = true;
-                      });
-                      setExpandedModules(all);
-                    }
+                    setIsEnrolled(true);
+                    setTimeout(() => setIsEnrolled(false), 3000);
                   }}
-                  className="font-satoshi text-[14px] text-[#003BE2] font-semibold hover:underline self-start sm:self-auto cursor-pointer"
+                  className="w-full bg-[#D4FB20] hover:bg-[#C4EC00] active:scale-[0.98] text-[#0F172A] font-poppins font-medium text-[16px] rounded-full transition-all cursor-pointer shadow-sm flex items-center justify-center gap-2 mt-2 mb-8 px-6 py-3"
                 >
-                  {Object.keys(expandedModules).length === course.curriculum.length
-                    ? 'Collapse all sections'
-                    : 'Expand all sections'}
+                  {isEnrolled ? 'Enrolled Successfully!' : 'Enroll Now'}
                 </button>
-              </div>
 
-              {/* Accordion List */}
-              <div className="flex flex-col gap-3">
-                {course.curriculum.map((module, mIdx) => {
-                  const isOpen = expandedModules[mIdx];
-                  return (
-                    <div
-                      key={mIdx}
-                      className="border border-[#E2E8F0] rounded-[16px] overflow-hidden transition-all"
-                    >
-                      {/* Accordion Header */}
-                      <button
-                        onClick={() => toggleModule(mIdx)}
-                        className="w-full bg-[#F8FAFC] hover:bg-[#F1F5F9] px-5 py-4 flex items-center justify-between text-left transition-colors cursor-pointer"
-                      >
-                        <div className="flex items-center gap-3">
-                          <svg
-                            className={`w-4 h-4 text-[#64748B] transition-transform duration-200 ${
-                              isOpen ? 'transform rotate-180' : ''
-                            }`}
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                          </svg>
-                          <span className="font-poppins font-semibold text-[15px] sm:text-[16px] text-[#0F172A]">
-                            {module.moduleTitle}
-                          </span>
-                        </div>
-                        <span className="font-satoshi text-[13px] text-[#64748B] flex-shrink-0">
-                          {module.lessons.length} lectures • {module.duration}
-                        </span>
-                      </button>
+                {/* This course include Section with exact 24px vector icons */}
+                <div className="flex flex-col gap-3.5">
+                  <h4 className="font-poppins font-semibold text-[18px] text-[#0F172A] mb-1">
+                    This course include
+                  </h4>
 
-                      {/* Accordion Body: Lessons */}
-                      {isOpen && (
-                        <div className="bg-white divide-y divide-[#F1F5F9] px-5 py-2">
-                          {module.lessons.map((lesson, lIdx) => (
-                            <div
-                              key={lIdx}
-                              className="py-3 flex items-center justify-between gap-3 text-[14px]"
-                            >
-                              <div className="flex items-center gap-3">
-                                <div className="w-6 h-6 rounded-full bg-[#F1F5F9] text-[#64748B] flex items-center justify-center flex-shrink-0 text-[11px] font-medium">
-                                  {lIdx + 1}
-                                </div>
-                                <span className="font-satoshi text-[#1E293B] font-medium">
-                                  {lesson.title}
-                                </span>
-                              </div>
-
-                              <div className="flex items-center gap-3 flex-shrink-0">
-                                {lesson.isPreview ? (
-                                  <button
-                                    onClick={() => setIsVideoModalOpen(true)}
-                                    className="text-[12px] font-satoshi font-semibold text-[#003BE2] hover:underline flex items-center gap-1 cursor-pointer"
-                                  >
-                                    <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
-                                      <path d="M8 5v14l11-7z" />
-                                    </svg>
-                                    Preview
-                                  </button>
-                                ) : (
-                                  <svg className="w-4 h-4 text-[#94A3B8]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                                  </svg>
-                                )}
-                                <span className="font-satoshi text-[12px] text-[#64748B]">
-                                  {lesson.duration}
-                                </span>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-            </section>
-
-            {/* Section: Requirements */}
-            <section className="bg-white rounded-[24px] border border-[#E5E7EB] p-6 sm:p-8 shadow-sm">
-              <h2 className="font-poppins font-bold text-[22px] sm:text-[24px] text-[#0F172A] mb-4 flex items-center gap-2.5">
-                <span className="w-2.5 h-6 bg-[#003BE2] rounded-full inline-block"></span>
-                Requirements & Prerequisites
-              </h2>
-              <ul className="list-disc list-inside space-y-2.5 font-satoshi text-[15px] text-[#334155] marker:text-[#003BE2]">
-                {course.requirements.map((req, idx) => (
-                  <li key={idx} className="leading-relaxed">
-                    {req}
-                  </li>
-                ))}
-              </ul>
-            </section>
-
-            {/* Section: Instructor Profile */}
-            <section id="instructor-sec" className="bg-white rounded-[24px] border border-[#E5E7EB] p-6 sm:p-8 shadow-sm">
-              <h2 className="font-poppins font-bold text-[22px] sm:text-[24px] text-[#0F172A] mb-6 flex items-center gap-2.5">
-                <span className="w-2.5 h-6 bg-[#003BE2] rounded-full inline-block"></span>
-                Instructor
-              </h2>
-
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 mb-6">
-                <img
-                  src={course.instructorAvatar}
-                  alt={course.instructor}
-                  className="w-20 h-20 rounded-full object-cover border-2 border-[#003BE2]/20 shadow-md flex-shrink-0"
-                />
-                <div>
-                  <h3 className="font-poppins font-bold text-[20px] text-[#0F172A]">
-                    {course.instructor}
-                  </h3>
-                  <p className="font-satoshi text-[14px] text-[#003BE2] font-semibold mt-0.5">
-                    {course.instructorRole}
-                  </p>
-                  <div className="flex items-center gap-4 mt-2 font-satoshi text-[13px] text-[#64748B]">
-                    <span className="flex items-center gap-1 font-medium text-[#0F172A]">
-                      ⭐ {course.rating} Rating
+                  <div className="flex items-center gap-3">
+                    <img
+                      src="/courseDetailsIcon/Vector (14).png"
+                      alt="Learning Resources"
+                      className="w-[24px] h-[24px] object-contain flex-shrink-0"
+                    />
+                    <span className="font-satoshi text-[14px] text-[#475569]">
+                      Learning Resources
                     </span>
-                    <span>•</span>
-                    <span>{course.enrolledCount} Students</span>
-                    <span>•</span>
-                    <span>12 Courses</span>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <img
+                      src="/courseDetailsIcon/Vector (15).png"
+                      alt="Quality Lesson Videos"
+                      className="w-[24px] h-[24px] object-contain flex-shrink-0"
+                    />
+                    <span className="font-satoshi text-[14px] text-[#475569]">
+                      Quality Lesson Videos
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <img
+                      src="/courseDetailsIcon/Vector (16).png"
+                      alt="Certificate of Completion"
+                      className="w-[24px] h-[24px] object-contain flex-shrink-0"
+                    />
+                    <span className="font-satoshi text-[14px] text-[#475569]">
+                      Certificate of Completion
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <img
+                      src="/courseDetailsIcon/Vector (17).png"
+                      alt="Private Consultation"
+                      className="w-[24px] h-[24px] object-contain flex-shrink-0"
+                    />
+                    <span className="font-satoshi text-[14px] text-[#475569]">
+                      Private Consultation
+                    </span>
                   </div>
                 </div>
               </div>
 
-              <p className="font-satoshi text-[15px] text-[#475569] leading-relaxed">
-                {course.instructorBio}
-              </p>
-            </section>
-
-            {/* Section: Reviews & Feedback */}
-            <section id="reviews-sec" className="bg-white rounded-[24px] border border-[#E5E7EB] p-6 sm:p-8 shadow-sm">
-              <h2 className="font-poppins font-bold text-[22px] sm:text-[24px] text-[#0F172A] mb-6 flex items-center gap-2.5">
-                <span className="w-2.5 h-6 bg-[#003BE2] rounded-full inline-block"></span>
-                Student Reviews
-              </h2>
-
-              {/* Review Highlights */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {[
-                  {
-                    name: 'Sarah Jenkins',
-                    role: 'Junior UI Designer',
-                    avatar: '/customerImage/5824acacb3b76175bc84084ec18597109498f96d.png',
-                    rating: 5,
-                    comment: 'This course completely bridged the gap for me. The auto-layout and design systems modules were explained better than any bootcamp I have taken!',
-                  },
-                  {
-                    name: 'Alexandre Dubois',
-                    role: 'Product Manager',
-                    avatar: '/customerImage/7fdccc783264eedc4fb989984eecbc4058a219f2.png',
-                    rating: 5,
-                    comment: 'Crisp, actionable, and straight to the point. The exercise files and real-world workflows gave me instant confidence to collaborate with my design team.',
-                  },
-                ].map((rev, i) => (
-                  <div key={i} className="p-5 rounded-[18px] bg-[#F8FAFC] border border-[#E2E8F0] flex flex-col justify-between">
-                    <p className="font-satoshi text-[14px] text-[#334155] italic mb-4 leading-relaxed">
-                      "{rev.comment}"
+              {/* Bottom Profile Section */}
+              <div className="border-t border-[#E5E7EB] pt-6 mt-8">
+                <div className="flex items-center gap-3.5 mb-3">
+                  {/* Round Avatar: 52px */}
+                  <img
+                    src={course.instructorAvatar || '/customerImage/1e078348a54489bfd231d82fe1944770883c8d80.png'}
+                    alt={course.instructor}
+                    className="w-[52px] h-[52px] rounded-full object-cover border border-[#E5E7EB] flex-shrink-0"
+                  />
+                  <div>
+                    <h5 className="font-poppins font-semibold text-[16px] text-[#0F172A] leading-tight">
+                      PurePearl Studio
+                    </h5>
+                    <p className="font-satoshi text-[13px] text-[#64748B]">
+                      Professional Creator
                     </p>
-                    <div className="flex items-center gap-3">
-                      <img src={rev.avatar} alt={rev.name} className="w-10 h-10 rounded-full object-cover bg-slate-200" />
-                      <div>
-                        <p className="font-poppins font-semibold text-[14px] text-[#0F172A]">{rev.name}</p>
-                        <p className="font-satoshi text-[12px] text-[#64748B]">{rev.role}</p>
-                      </div>
-                    </div>
                   </div>
-                ))}
-              </div>
-            </section>
+                </div>
 
-          </div>
-
-          {/* Right Column: Sticky Enrollment Box (4 cols) */}
-          <div className="lg:col-span-4 sticky top-20 z-20">
-            <div className="bg-white rounded-[24px] border border-[#E5E7EB] p-6 sm:p-7 shadow-[0_12px_36px_rgba(0,0,0,0.08)]">
-              
-              {/* Mini Thumbnail */}
-              <div className="relative w-full h-[180px] rounded-[16px] overflow-hidden mb-6 bg-slate-100">
-                <img
-                  src={course.image}
-                  alt={course.title}
-                  className="w-full h-full object-cover"
-                />
-                <span className="absolute top-3 right-3 bg-[#D5FF00] text-[#0F172A] px-3 py-1 rounded-full text-[12px] font-poppins font-bold shadow-sm">
-                  Limited Offer
-                </span>
-              </div>
-
-              {/* Pricing Section */}
-              <div className="flex items-baseline gap-3 mb-6">
-                <span className="font-poppins font-bold text-[36px] text-[#003BE2]">
-                  {course.price}
-                </span>
-                <span className="font-satoshi text-[18px] text-[#94A3B8] line-through">
-                  {course.originalPrice}
-                </span>
-                <span className="font-satoshi text-[13px] font-semibold text-[#10B981] bg-[#ECFDF5] px-2.5 py-1 rounded-full">
-                  70% OFF
-                </span>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="flex flex-col gap-3 mb-6">
-                <button
-                  onClick={() => {
-                    setAddedToCart(true);
-                    setTimeout(() => setAddedToCart(false), 3000);
-                  }}
-                  className="w-full h-[52px] bg-[#D5FF00] hover:bg-[#C4EC00] active:scale-[0.98] text-[#0F172A] font-poppins font-semibold text-[16px] rounded-full transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer"
-                >
-                  {addedToCart ? (
-                    <>
-                      <svg className="w-5 h-5 text-[#0F172A]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
-                      </svg>
-                      Enrolled Successfully!
-                    </>
-                  ) : (
-                    'Enroll Now'
-                  )}
-                </button>
+                <p className="font-satoshi text-[13px] text-[#64748B] leading-relaxed mb-4">
+                  Ready to Dive In? Enroll Now and Start Building Your Digital Future!
+                </p>
 
                 <button
-                  onClick={() => {
-                    setAddedToCart(true);
-                    setTimeout(() => setAddedToCart(false), 3000);
-                  }}
-                  className="w-full h-[48px] bg-[#003BE2] hover:bg-[#0030B8] active:scale-[0.98] text-white font-satoshi font-semibold text-[15px] rounded-full transition-all cursor-pointer flex items-center justify-center gap-2"
+                  type="button"
+                  className="border border-[#CED0D3] hover:border-[#0F172A] rounded-full px-6 py-2 text-[14px] font-satoshi font-medium text-[#0F172A] hover:bg-slate-50 transition-colors w-max cursor-pointer"
                 >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                  </svg>
-                  Add to Cart
-                </button>
-              </div>
-
-              {/* 30-day guarantee */}
-              <div className="flex items-center justify-center gap-2 text-center text-[13px] font-satoshi text-[#64748B] mb-6">
-                <svg className="w-4 h-4 text-[#10B981] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
-                <span>30-Day Money-Back Guarantee</span>
-              </div>
-
-              {/* Course Checklist */}
-              <div className="border-t border-[#E2E8F0] pt-6">
-                <h4 className="font-poppins font-semibold text-[15px] text-[#0F172A] mb-3">
-                  This course includes:
-                </h4>
-                <ul className="space-y-3 font-satoshi text-[13px] text-[#475569]">
-                  {course.includes.map((inc, i) => (
-                    <li key={i} className="flex items-center gap-2.5">
-                      <svg className="w-4 h-4 text-[#003BE2] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7" />
-                      </svg>
-                      <span>{inc}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Wishlist and Share */}
-              <div className="flex items-center justify-between border-t border-[#E2E8F0] mt-6 pt-5">
-                <button
-                  onClick={() => setIsWishlisted(!isWishlisted)}
-                  className="flex items-center gap-1.5 font-satoshi text-[13px] font-semibold text-[#475569] hover:text-[#003BE2] transition-colors cursor-pointer"
-                >
-                  <svg
-                    className={`w-4 h-4 ${isWishlisted ? 'text-red-500 fill-current' : 'text-[#64748B]'}`}
-                    viewBox="0 0 24 24"
-                    fill={isWishlisted ? 'currentColor' : 'none'}
-                    stroke="currentColor"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                  </svg>
-                  <span>{isWishlisted ? 'Wishlisted' : 'Add to Wishlist'}</span>
-                </button>
-
-                <button
-                  onClick={() => {
-                    if (navigator.clipboard) {
-                      navigator.clipboard.writeText(window.location.href);
-                      alert('Course URL copied to clipboard!');
-                    }
-                  }}
-                  className="flex items-center gap-1.5 font-satoshi text-[13px] font-semibold text-[#475569] hover:text-[#003BE2] transition-colors cursor-pointer"
-                >
-                  <svg className="w-4 h-4 text-[#64748B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
-                  </svg>
-                  <span>Share</span>
+                  See Full Profile
                 </button>
               </div>
 
             </div>
+
           </div>
 
         </div>
+      </section>
 
-        {/* Bottom Section: Related Courses */}
-        {relatedCourses.length > 0 && (
-          <section className="mt-16 sm:mt-20 pt-12 border-t border-[#E2E8F0]">
-            <div className="flex items-center justify-between mb-8">
-              <div>
-                <h2 className="font-poppins font-bold text-[26px] sm:text-[30px] text-[#0F172A]">
-                  You Might Also Like
-                </h2>
-                <p className="font-satoshi text-[15px] text-[#64748B] mt-1">
-                  Explore top-rated courses in {course.category}
-                </p>
-              </div>
-              <Link
-                href="/courses"
-                className="font-satoshi text-[14px] sm:text-[15px] font-semibold text-[#003BE2] hover:underline flex items-center gap-1"
+      {/* Main Content Area Below Hero: White background */}
+      <main className="w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 pt-8 lg:pt-10 pb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          {/* Left Content Container: Width 725px */}
+          <div className="lg:col-span-8 w-full lg:w-[725px] max-w-[725px] flex flex-col">
+            
+            {/* Tab Buttons: Padding 12px 16px, Rounded-full */}
+            <div className="flex items-center gap-2 sm:gap-3 mb-8">
+              <button
+                onClick={() => setActiveTab('about')}
+                className={`font-satoshi text-[14px] font-medium px-[16px] py-[12px] rounded-full transition-all cursor-pointer ${
+                  activeTab === 'about'
+                    ? 'bg-[#D4FB20] text-[#0F172A]'
+                    : 'bg-[#F5F5F6] text-[#64748B] hover:bg-[#EAEAEA]'
+                }`}
               >
-                View all courses →
-              </Link>
+                About
+              </button>
+
+              <button
+                onClick={() => setActiveTab('lesson')}
+                className={`font-satoshi text-[14px] font-medium px-[16px] py-[12px] rounded-full transition-all cursor-pointer ${
+                  activeTab === 'lesson'
+                    ? 'bg-[#D4FB20] text-[#0F172A]'
+                    : 'bg-[#F5F5F6] text-[#64748B] hover:bg-[#EAEAEA]'
+                }`}
+              >
+                Lesson
+              </button>
+
+              <button
+                onClick={() => setActiveTab('reviews')}
+                className={`font-satoshi text-[14px] font-medium px-[16px] py-[12px] rounded-full transition-all cursor-pointer ${
+                  activeTab === 'reviews'
+                    ? 'bg-[#D4FB20] text-[#0F172A]'
+                    : 'bg-[#F5F5F6] text-[#64748B] hover:bg-[#EAEAEA]'
+                }`}
+              >
+                Reviews
+              </button>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-              {relatedCourses.map((relCourse) => (
-                <div key={relCourse.id} className="flex justify-center">
-                  <CourseCard course={relCourse} />
+            {/* TAB CONTENT: ABOUT */}
+            {activeTab === 'about' && (
+              <>
+                {/* Description Section */}
+                <section className="mb-10">
+                  <h2 className="font-poppins font-semibold text-[22px] sm:text-[24px] text-[#0F172A] mb-4">
+                    Description
+                  </h2>
+
+                  <div className="font-satoshi text-[15px] sm:text-[16px] text-[#64748B] leading-[1.7] space-y-4">
+                    <p>
+                      Embark on an enlightening exploration into the world of digital creation with our comprehensive course, &quot;Build Digital Assets: A Comprehensive Guide.&quot; This transformative learning experience invites you to delve deep into the intricacies of crafting impactful digital content. From laying the groundwork with foundational concepts to mastering advanced techniques, this guide is meticulously curated to empower you with the skills essential for navigating the dynamic landscape of digital asset creation.
+                    </p>
+
+                    <p>
+                      In the initial modules, you&apos;ll establish a solid foundation by immersing yourself in the foundational concepts that form the backbone of digital asset creation. Understand the fundamental elements that constitute compelling digital content and gain proficiency in leveraging these elements to communicate effectively in the digital realm.
+                    </p>
+
+                    <p>
+                      As you progress through the course, you&apos;ll ascend to higher levels of expertise, delving into the nuances of design principles that drive impactful creations. Uncover the secrets behind effective visual communication, exploring color theory, typography, and layout strategies that elevate your digital assets to new heights. Engage in hands-on exercises that reinforce your understanding, allowing you to apply these principles in practical scenarios.
+                    </p>
+                  </div>
+                </section>
+
+                {/* Sneak Peak Section with 4 Rounded Visual Cards */}
+                <section className="mb-12">
+                  <h3 className="font-poppins font-semibold text-[20px] sm:text-[22px] text-[#0F172A] mb-5">
+                    Sneak Peak
+                  </h3>
+
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5 sm:gap-4">
+                    <div className="h-[110px] sm:h-[120px] rounded-[16px] overflow-hidden shadow-sm bg-slate-100">
+                      <img
+                        src="/courseDetailsIcon/0c1762672f5c64aa67de3991c2ac4aa729328623.jpg"
+                        alt="Sneak peak 1"
+                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+
+                    <div className="h-[110px] sm:h-[120px] rounded-[16px] overflow-hidden shadow-sm bg-slate-100">
+                      <img
+                        src="/courseDetailsIcon/2e1b62a2460ffba94cc633550f3a06e03b29b432.jpg"
+                        alt="Sneak peak 2"
+                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+
+                    <div className="h-[110px] sm:h-[120px] rounded-[16px] overflow-hidden shadow-sm bg-slate-100">
+                      <img
+                        src="/courseDetailsIcon/a7c9406fd05787fc6c03edf5db05f212b96366a6.jpg"
+                        alt="Sneak peak 3"
+                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+
+                    <div className="h-[110px] sm:h-[120px] rounded-[16px] overflow-hidden shadow-sm bg-slate-100">
+                      <img
+                        src="/courseDetailsIcon/d443b5217bfd460249d4ac0712aa129bc29a8919.jpg"
+                        alt="Sneak peak 4"
+                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                  </div>
+                </section>
+
+                {/* Key Points Section: 8 Items with Blue Checkmark Icons */}
+                <section className="mb-12">
+                  <h3 className="font-poppins font-semibold text-[20px] sm:text-[22px] text-[#0F172A] mb-5">
+                    Key Points
+                  </h3>
+
+                  <div className="flex flex-col gap-3.5">
+                    {[
+                      'Foundational Concepts',
+                      'Design Principles Mastery',
+                      'Advanced Techniques in Digital Creation',
+                      'Project Showcase and Critique',
+                      'Optimizing for Various Platforms',
+                      'Digital Asset Management Best Practices',
+                      'Monetization Strategies',
+                      'Capstone Project: Building Your Portfolio',
+                    ].map((point, idx) => (
+                      <div key={idx} className="flex items-center gap-3">
+                        {/* Blue Round Checkmark */}
+                        <div className="w-5 h-5 rounded-full bg-[#003BE2] flex items-center justify-center flex-shrink-0">
+                          <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
+                          </svg>
+                        </div>
+                        <span className="font-satoshi text-[15px] sm:text-[16px] text-[#334155]">
+                          {point}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              </>
+            )}
+
+            {/* TAB CONTENT: LESSON */}
+            {activeTab === 'lesson' && (
+              <div className="flex flex-col">
+                {/* Explore the Modules Header */}
+                <section className="mb-8">
+                  <h2 className="font-poppins font-semibold text-[22px] sm:text-[24px] text-[#0F172A] mb-3">
+                    Explore the Modules
+                  </h2>
+                  <p className="font-satoshi text-[15px] sm:text-[16px] text-[#64748B] leading-relaxed">
+                    Immerse yourself in the course content as we break down each module into comprehensive lessons, providing practical insights and hands-on experiences.
+                  </p>
+                </section>
+
+                {/* Lesson List with Lime #D4FB20 Video Icons & 24px Radius */}
+                <section className="mb-10">
+                  <h3 className="font-poppins font-semibold text-[20px] sm:text-[22px] text-[#0F172A] mb-6">
+                    Lesson List
+                  </h3>
+
+                  <div className="flex flex-col gap-5 sm:gap-6">
+                    {[
+                      {
+                        title: 'Module 1: Introduction to Digital Assets',
+                        desc: "Lay the groundwork with lessons like 'Understanding Digital Elements' and 'Navigating Design Software Tools.' Dive into the essentials of digital asset creation.",
+                      },
+                      {
+                        title: 'Module 2: Design Principles for Impact',
+                        desc: "Master the principles that drive impactful designs with lessons such as 'Color Theory in Digital Design' and 'Typography Essentials.' Elevate your visual communication skills.",
+                      },
+                      {
+                        title: 'Module 4: User-Centric Design Strategies',
+                        desc: "Understand 'Design Thinking in Digital Creation' and delve into 'User Experience (UX) Essentials.' Craft digital assets with a focus on user-centric design.",
+                      },
+                      {
+                        title: 'Module 5: Interactive Media and Engagement',
+                        desc: "Engage your audience with lessons like 'Creating Interactive Presentations' and 'Integrating Multimedia Elements.' Master the art of creating immersive digital experiences.",
+                      },
+                      {
+                        title: 'Module 6: Project Showcase and Critique',
+                        desc: "Perfect your presentation skills with 'Effective Presentation Techniques' and embrace collaboration with 'Peer Critique and Collaboration.' Showcase your work with confidence.",
+                      },
+                      {
+                        title: 'Module 7: Optimizing Digital Assets for Various Platforms',
+                        desc: "Adapt your digital creations for 'Mobile Platforms' and optimize for 'Social Media.' Ensure widespread accessibility and engagement across diverse digital landscapes.",
+                      },
+                    ].map((mod, idx) => (
+                      <div key={idx} className="flex items-start gap-4 sm:gap-5">
+                        {/* Video icon container: bg #D4FB20, radius 24px */}
+                        <div className="w-[56px] h-[56px] sm:w-[60px] sm:h-[60px] rounded-[24px] bg-[#D4FB20] flex items-center justify-center flex-shrink-0 shadow-sm">
+                          <svg width="30" height="20" viewBox="0 0 30 20" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-[30px] h-[20px] flex-shrink-0">
+                            <rect x="1.5" y="1.5" width="18" height="17" rx="2.5" stroke="#0F172A" strokeWidth="2.5" fill="none" />
+                            <path d="M19.5 7.5L28.5 3V17L19.5 12.5V7.5Z" fill="#0F172A" />
+                          </svg>
+                        </div>
+
+                        {/* Module Text Info */}
+                        <div className="flex-1 pt-0.5">
+                          <h4 className="font-poppins font-semibold text-[15px] sm:text-[16px] text-[#0F172A] leading-snug">
+                            {mod.title}
+                          </h4>
+                          <p className="font-satoshi text-[14px] text-[#64748B] leading-relaxed mt-1">
+                            {mod.desc}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+
+                {/* Lesson Content Section */}
+                <section className="mb-8">
+                  <h3 className="font-poppins font-semibold text-[20px] sm:text-[22px] text-[#0F172A] mb-3">
+                    Lesson Content
+                  </h3>
+                  <p className="font-satoshi text-[15px] sm:text-[16px] text-[#64748B] leading-relaxed">
+                    Engage with each lesson through captivating video content, detailed textual explanations, and interactive elements. Download resources, complete assignments, and test your understanding with quizzes.
+                  </p>
+                </section>
+
+                {/* Lesson Progress Tracking Section */}
+                <section className="mb-12">
+                  <h3 className="font-poppins font-semibold text-[20px] sm:text-[22px] text-[#0F172A] mb-3">
+                    Lesson Progress Tracking
+                  </h3>
+                  <p className="font-satoshi text-[15px] sm:text-[16px] text-[#64748B] leading-relaxed mb-6">
+                    Witness your growth as you complete lessons, with an intuitive progress tracking feature guiding you through your learning journey.
+                  </p>
+
+                  {/* Progress Card */}
+                  <div className="w-full border border-[#E5E7EB] rounded-[24px] p-6 sm:p-7 bg-white shadow-sm">
+                    <p className="font-satoshi text-[14px] text-[#0F172A] font-medium">
+                      Learning Progress
+                    </p>
+                    <p className="font-poppins font-bold text-[36px] text-[#0F172A] leading-none my-2">
+                      55%
+                    </p>
+                    <div className="w-full h-[7px] bg-[#E2E8F0] rounded-full overflow-hidden mt-3">
+                      <div className="w-[55%] h-full bg-[#D4FB20] rounded-full" />
+                    </div>
+                  </div>
+                </section>
+              </div>
+            )}
+
+            {/* TAB CONTENT: REVIEWS */}
+            {activeTab === 'reviews' && (
+              <div className="flex flex-col mb-12">
+                {/* What Learners Are Saying Header */}
+                <section className="mb-6">
+                  <h2 className="font-poppins font-semibold text-[20px] sm:text-[22px] text-[#0F172A] mb-3">
+                    What Learners Are Saying
+                  </h2>
+                  <p className="font-satoshi text-[15px] sm:text-[16px] text-[#64748B] leading-relaxed">
+                    Discover what our learners have to say about their experience with &apos;Build Digital Assets: A Comprehensive Guide.&apos; Read reviews and ratings from individuals who have embarked on the transformative journey of mastering digital asset creation.
+                  </p>
+                </section>
+
+                {/* Overall Ratings Breakdown Card: Padding 40px, Radius 24px */}
+                <div className="w-full border border-[#E5E7EB] rounded-[24px] p-6 sm:p-8 lg:p-[40px] flex flex-col sm:flex-row items-center gap-6 sm:gap-10 bg-white shadow-sm mb-10">
+                  {/* Left Lime Rating Box */}
+                  <div className="w-[130px] h-[130px] sm:w-[140px] sm:h-[140px] bg-[#D4FB20] rounded-[24px] flex flex-col items-center justify-center flex-shrink-0 text-center shadow-sm">
+                    <span className="font-satoshi text-[13px] font-medium text-[#242528]">
+                      Ratings
+                    </span>
+                    <span className="font-poppins font-semibold text-[34px] sm:text-[36px] text-[#242528] leading-none mt-1">
+                      4.7
+                    </span>
+                  </div>
+
+                  {/* Right 5-Row Star Breakdown */}
+                  <div className="flex-1 w-full flex flex-col gap-2.5">
+                    {[
+                      { percent: '85%', count: '720' },
+                      { percent: '40%', count: '120' },
+                      { percent: '10%', count: '21' },
+                      { percent: '5%', count: '12' },
+                      { percent: '6%', count: '16' },
+                    ].map((row, idx) => (
+                      <div key={idx} className="flex items-center gap-3 sm:gap-4 w-full">
+                        {/* Progress Bar with Lime Fill */}
+                        <div className="flex-1 h-[8px] bg-[#E2E8F0] rounded-full overflow-hidden">
+                          <div
+                            className="h-full bg-[#D4FB20] rounded-full"
+                            style={{ width: row.percent }}
+                          />
+                        </div>
+
+                        {/* 5 Stars: Color #4B4C53, Size 20px x 20px */}
+                        <div className="flex items-center gap-1 flex-shrink-0">
+                          {[...Array(5)].map((_, sIdx) => (
+                            <svg key={sIdx} width="20" height="20" viewBox="0 0 24 24" fill="#4B4C53" className="w-[20px] h-[20px] flex-shrink-0">
+                              <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+                            </svg>
+                          ))}
+                        </div>
+
+                        {/* Count: Color #242528 */}
+                        <span className="font-satoshi text-[13px] sm:text-[14px] text-[#242528] min-w-[28px] text-right font-medium flex-shrink-0">
+                          {row.count}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              ))}
-            </div>
-          </section>
-        )}
+
+                {/* Individual Reviews Section */}
+                <section>
+                  <h3 className="font-poppins font-semibold text-[20px] text-[#242528] mb-4">
+                    Individual Reviews:
+                  </h3>
+
+                  {/* Rating Filter Pills */}
+                  <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-8">
+                    {['All rating', '★ 5', '★ 4', '★ 3', '★ 2', '★ 1'].map((pill, pIdx) => (
+                      <button
+                        key={pIdx}
+                        type="button"
+                        className={`font-satoshi text-[14px] px-4 py-2 rounded-full transition-all cursor-pointer ${
+                          pIdx === 0
+                            ? 'bg-[#D4FB20] text-[#242528] font-medium shadow-sm'
+                            : 'bg-[#F5F5F6] text-[#242528] hover:bg-[#EAEAEA]'
+                        }`}
+                      >
+                        {pill}
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* Review Cards List: Padding 40px, Gap 24px, Radius 24px */}
+                  <div className="flex flex-col gap-[24px]">
+                    {[
+                      {
+                        name: 'PurePearl Studio',
+                        role: 'UI/UX Designer',
+                        avatar: '/reviewimages/efb6f62056dfdd8faea9ed52a81fbdcd844baa28.png',
+                        time: 'a year ago',
+                        comment: 'The course provided me with a comprehensive understanding of digital asset creation. The lessons were in-depth, practical, and immediately applicable to my work. Highly recommended!',
+                      },
+                      {
+                        name: 'Albert Flores',
+                        role: 'UI/UX Designer',
+                        avatar: '/reviewimages/13d1f8e83dbc0f34bfd2aed999007fa6b98dad04.png',
+                        time: 'a year ago',
+                        comment: "This course transformed my approach to digital design. The combination of theory, hands-on exercises, and real-world applications made it a truly enriching experience. Excited to implement what I've learned!",
+                      },
+                      {
+                        name: 'Cody Fisher',
+                        role: 'UI/UX Designer',
+                        avatar: '/reviewimages/63c4be83222c85e6c852819bc5d4b24a87a87fb6 (1).png',
+                        time: 'a year ago',
+                        comment: 'The project showcase and critique module created a collaborative environment where I could showcase my work, receive valuable feedback, and refine my skills. It added a unique and valuable dimension to the learning process.',
+                      },
+                      {
+                        name: 'Brooklyn Simmons',
+                        role: 'UI/UX Designer',
+                        avatar: '/reviewimages/9ef8cb329b949267cc8214b6727067c4a13af4b4 (1).png',
+                        time: 'a year ago',
+                        comment: 'The lessons on optimizing digital assets for various platforms were particularly insightful. The course adapts to the evolving digital landscape, and the engaging content kept me motivated throughout.',
+                      },
+                    ].map((rev, rIdx) => (
+                      <div
+                        key={rIdx}
+                        className="w-full border border-[#E5E7EB] rounded-[24px] p-6 sm:p-8 lg:p-[40px] bg-white shadow-sm flex flex-col"
+                      >
+                        {/* Header: Avatar, Name, Role & Timestamp */}
+                        <div className="flex items-center justify-between gap-4 mb-3">
+                          <div className="flex items-center gap-3.5">
+                            <img
+                              src={rev.avatar}
+                              alt={rev.name}
+                              className="w-[48px] h-[48px] rounded-full object-cover border border-[#E5E7EB] flex-shrink-0"
+                            />
+                            <div>
+                              <h4 className="font-poppins font-semibold text-[16px] text-[#242528] leading-tight">
+                                {rev.name}
+                              </h4>
+                              <p className="font-satoshi text-[13px] text-[#64748B]">
+                                {rev.role}
+                              </p>
+                            </div>
+                          </div>
+
+                          <span className="font-satoshi text-[13px] text-[#82868E] flex-shrink-0">
+                            {rev.time}
+                          </span>
+                        </div>
+
+                        {/* 5 Stars Row: Color #4B4C53, Size 20px x 20px */}
+                        <div className="flex items-center gap-1 my-2">
+                          {[...Array(5)].map((_, sIdx) => (
+                            <svg key={sIdx} width="20" height="20" viewBox="0 0 24 24" fill="#4B4C53" className="w-[20px] h-[20px] flex-shrink-0">
+                              <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+                            </svg>
+                          ))}
+                        </div>
+
+                        {/* Review Content */}
+                        <p className="font-satoshi text-[15px] sm:text-[16px] text-[#475569] leading-relaxed mt-2">
+                          &quot;{rev.comment}&quot;
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              </div>
+            )}
+
+          </div>
+
+          {/* Spacer Column on Desktop to balance the layout alongside Enroll Card */}
+          <div className="hidden lg:block lg:col-span-4" />
+
+        </div>
       </main>
 
-      {/* Video Preview Modal */}
+      {/* Video Modal Preview */}
       {isVideoModalOpen && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
           <div className="relative w-full max-w-[800px] bg-black rounded-[24px] overflow-hidden border border-white/20 shadow-2xl">
@@ -627,31 +750,31 @@ export default function CourseDetailsPage(props) {
             </div>
             <div className="relative aspect-video bg-slate-950 flex flex-col items-center justify-center text-center p-6">
               <img
-                src={course.image}
+                src="/courseDetailsIcon/71d7929ee0ecb2198c9955a8e842f4991dcb4655.jpg"
                 alt={course.title}
                 className="absolute inset-0 w-full h-full object-cover opacity-30"
               />
               <div className="relative z-10 flex flex-col items-center">
-                <div className="w-16 h-16 rounded-full bg-[#D5FF00] flex items-center justify-center text-[#0F172A] mb-4 animate-pulse">
+                <div className="w-16 h-16 rounded-full bg-[#D5FF00] flex items-center justify-center text-[#0F172A] mb-4">
                   <svg className="w-8 h-8 translate-x-0.5 fill-current" viewBox="0 0 24 24">
                     <path d="M8 5v14l11-7z" />
                   </svg>
                 </div>
                 <h4 className="font-poppins font-bold text-white text-[20px] mb-2">
-                  Interactive Course Demo
+                  Sample Lesson Preview
                 </h4>
                 <p className="font-satoshi text-white/80 text-[14px] max-w-[460px] mb-6">
-                  Experience full high-definition video lessons with downloadable assets upon enrollment.
+                  Experience full HD lesson streaming with exercise assets upon enrollment.
                 </p>
                 <button
                   onClick={() => {
                     setIsVideoModalOpen(false);
-                    setAddedToCart(true);
-                    setTimeout(() => setAddedToCart(false), 3000);
+                    setIsEnrolled(true);
+                    setTimeout(() => setIsEnrolled(false), 3000);
                   }}
                   className="px-8 py-3 bg-[#D5FF00] text-[#0F172A] font-poppins font-semibold text-[14px] rounded-full hover:bg-[#C4EC00] transition-colors cursor-pointer"
                 >
-                  Enroll Now ({course.price})
+                  Enroll Now ({course.price || '$25'})
                 </button>
               </div>
             </div>
