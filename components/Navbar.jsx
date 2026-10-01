@@ -13,27 +13,28 @@ export default function Navbar() {
           <div className="flex items-center gap-3 sm:gap-4">
             <button 
               type="button"
-              className="md:hidden text-white p-1 focus:outline-none cursor-pointer"
+              className="md:hidden text-white p-1 focus:outline-none cursor-pointer flex items-center justify-center relative w-7 h-7"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle Navigation Menu"
             >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                {mobileMenuOpen ? (
-                  <>
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                  </>
-                ) : (
-                  <>
-                    <line x1="3" y1="12" x2="21" y2="12"></line>
-                    <line x1="3" y1="6" x2="21" y2="6"></line>
-                    <line x1="3" y1="18" x2="21" y2="18"></line>
-                  </>
-                )}
-              </svg>
+              <span
+                className={`absolute h-0.5 w-5 bg-white rounded transition-all duration-300 ease-in-out ${
+                  mobileMenuOpen ? 'rotate-45 translate-y-0' : '-translate-y-1.5'
+                }`}
+              />
+              <span
+                className={`absolute h-0.5 w-5 bg-white rounded transition-all duration-300 ease-in-out ${
+                  mobileMenuOpen ? 'opacity-0 scale-x-0' : 'opacity-100'
+                }`}
+              />
+              <span
+                className={`absolute h-0.5 w-5 bg-white rounded transition-all duration-300 ease-in-out ${
+                  mobileMenuOpen ? '-rotate-45 translate-y-0' : 'translate-y-1.5'
+                }`}
+              />
             </button>
 
-            <a href="/" className="flex items-center gap-2.5 select-none focus:outline-none">
+            <a href="/" className="flex items-end gap-2.5 select-none focus:outline-none">
               <img 
                 src="/logo.png" 
                 alt="ByteSpace Icon" 
@@ -98,33 +99,76 @@ export default function Navbar() {
         </nav>
       </div>
 
-      {mobileMenuOpen && (
-        <div className="md:hidden fixed top-[68px] left-0 w-full bg-[#0047df] px-8 py-6 shadow-2xl flex flex-col gap-4 z-50 border-t border-white/10">
-          <a href="/" onClick={() => setMobileMenuOpen(false)} className="font-satoshi text-[17px] font-thin text-white hover:text-[#D5FF00]">
-            Home
+      {/* Mobile Menu Dropdown with Smooth Slide & Fade Transition */}
+      <div
+        className={`md:hidden absolute top-full left-0 w-full bg-[#003BE2] border-t border-white/10 shadow-2xl transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden z-50 ${
+          mobileMenuOpen
+            ? 'max-h-[440px] opacity-100 translate-y-0 pointer-events-auto visible'
+            : 'max-h-0 opacity-0 -translate-y-2 pointer-events-none invisible'
+        }`}
+      >
+        <div className="px-6 sm:px-8 py-5 flex flex-col gap-3.5">
+          <a
+            href="/"
+            onClick={() => setMobileMenuOpen(false)}
+            className="font-satoshi text-[16px] font-medium text-white hover:text-[#D4FB20] transition-colors py-1 flex items-center justify-between"
+          >
+            <span>Home</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-40">
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
           </a>
-          <a href="/courses" onClick={() => setMobileMenuOpen(false)} className="font-satoshi text-[17px] font-thin text-white hover:text-[#D5FF00]">
-            Courses
+          <a
+            href="/courses"
+            onClick={() => setMobileMenuOpen(false)}
+            className="font-satoshi text-[16px] font-medium text-white hover:text-[#D4FB20] transition-colors py-1 flex items-center justify-between"
+          >
+            <span>Courses</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-40">
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
           </a>
-          <a href="/creators" onClick={() => setMobileMenuOpen(false)} className="font-satoshi text-[17px] font-thin text-white hover:text-[#D5FF00]">
-            Creators
+          <a
+            href="/creators"
+            onClick={() => setMobileMenuOpen(false)}
+            className="font-satoshi text-[16px] font-medium text-white hover:text-[#D4FB20] transition-colors py-1 flex items-center justify-between"
+          >
+            <span>Creators</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-40">
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
           </a>
           <a
             href="/cart"
             onClick={() => setMobileMenuOpen(false)}
-            className="font-satoshi text-[17px] font-thin text-white hover:text-[#D5FF00]"
+            className="font-satoshi text-[16px] font-medium text-white hover:text-[#D4FB20] transition-colors py-1 flex items-center justify-between"
           >
-            Cart
+            <span>Cart</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-40">
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
           </a>
+
           <hr className="border-white/15 my-1" />
-          <a href="/login" onClick={() => setMobileMenuOpen(false)} className="font-satoshi text-[17px] font-thin text-white hover:text-[#D5FF00]">
-            Sign In
-          </a>
-          <a href="/register" onClick={() => setMobileMenuOpen(false)} className="font-satoshi text-[17px] font-thin text-white hover:text-[#D5FF00]">
-            Join Us
-          </a>
+
+          <div className="flex items-center gap-3 pt-1">
+            <a
+              href="/login"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex-1 text-center py-2.5 rounded-full border border-white/20 text-white font-satoshi text-[15px] font-medium hover:bg-white/10 transition-colors"
+            >
+              Sign In
+            </a>
+            <a
+              href="/register"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex-1 text-center py-2.5 rounded-full bg-[#D4FB20] text-[#0F172A] font-poppins text-[15px] font-semibold hover:bg-[#C4EC00] transition-colors"
+            >
+              Join Us
+            </a>
+          </div>
         </div>
-      )}
+      </div>
     </header>
   );
 }
