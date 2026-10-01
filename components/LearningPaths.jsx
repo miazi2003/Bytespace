@@ -1,50 +1,11 @@
 import React from 'react';
 import Link from 'next/link';
-
-const CATEGORIES = [
-  {
-    id: 'design',
-    name: 'Design',
-    icon: '/icon-images/Frame (7).png',
-    alt: 'Design Icon',
-  },
-  {
-    id: 'development',
-    name: 'Development',
-    icon: '/icon-images/Style=Filled.png',
-    alt: 'Development Icon',
-  },
-  {
-    id: 'it-software',
-    name: 'IT & Software',
-    icon: '/icon-images/Style=Filled (1).png',
-    alt: 'IT & Software Icon',
-  },
-  {
-    id: 'business',
-    name: 'Business',
-    icon: '/icon-images/Style=Round.png',
-    alt: 'Business Icon',
-  },
-  {
-    id: 'marketing',
-    name: 'Marketing',
-    icon: '/icon-images/Style=Outlined (1).png',
-    alt: 'Marketing Icon',
-  },
-  {
-    id: 'photography',
-    name: 'Photography',
-    icon: '/icon-images/Style=Outlined (2).png',
-    alt: 'Photography Icon',
-  },
-];
+import { LEARNING_PATH_CATEGORIES } from '../data/categories';
 
 export default function LearningPaths() {
   return (
     <section className="w-full py-[72px] bg-white flex flex-col items-center">
       <div className="w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
-        {/* Header Container */}
         <div className="w-full max-w-[880px] mx-auto text-center mb-[70px]">
           <h2 className="font-poppins font-semibold text-[30px] md:text-[36px] text-[#0F172A] leading-tight mb-4">
             Explore Diverse Learning Paths at Bytespace
@@ -54,9 +15,8 @@ export default function LearningPaths() {
           </p>
         </div>
 
-        {/* Categories Icon Container: 2 columns on mobile, single flex row on desktop */}
         <div className="w-full grid grid-cols-2 sm:grid-cols-3 lg:flex lg:items-center lg:justify-center justify-items-center gap-4 sm:gap-6 lg:gap-[40px]">
-          {CATEGORIES.map((cat) => (
+          {LEARNING_PATH_CATEGORIES.map((cat) => (
             <Link
               key={cat.id}
               href={`/categories/${cat.id}`}

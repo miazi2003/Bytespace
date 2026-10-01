@@ -35,9 +35,7 @@ const rightAssetVariants = {
 export default function CreatorCTA() {
   return (
     <section className="relative w-full bg-[#003BE2] bg-grid-pattern overflow-hidden py-[85px]">
-      {/* 3D Floating Decorative Assets - Arriving smoothly from Left & Right */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden select-none" aria-hidden="true">
-        {/* Top-Left Lime Squiggle - Arrive from Left */}
         <motion.img
           custom={0.1}
           initial="hidden"
@@ -49,7 +47,6 @@ export default function CreatorCTA() {
           className="absolute top-[0px] sm:top-[0px] -left-[0px] sm:-left-[30px] w-[190px] sm:w-[300px] object-contain -rotate-[0deg]"
         />
 
-        {/* Top-Left White Squiggle - Arrive from Left */}
         <motion.img
           custom={0.2}
           initial="hidden"
@@ -61,7 +58,6 @@ export default function CreatorCTA() {
           className="absolute top-[15px] sm:top-[25px] left-[12%] sm:left-[10%] w-[80px] sm:w-[170px] object-contain rotate-[5deg] hidden md:block"
         />
 
-        {/* Bottom-Left White Cone - Arrive from Left */}
         <motion.img
           custom={0.15}
           initial="hidden"
@@ -73,7 +69,6 @@ export default function CreatorCTA() {
           className="absolute bottom-[60px] -left-[00px] sm:left-[0px] w-[100px] sm:w-[150px] object-contain"
         />
 
-        {/* Bottom-Left Lime Torus Ring - Arrive from Left */}
         <motion.img
           custom={0.25}
           initial="hidden"
@@ -85,7 +80,6 @@ export default function CreatorCTA() {
           className="absolute bottom-[0px] sm:bottom-[0px] -left-[10px] sm:left-[45px] w-[190px] sm:w-[320px] object-contain"
         />
 
-        {/* Top-Right Lime Pyramid - Arrive from Right */}
         <motion.img
           custom={0.18}
           initial="hidden"
@@ -97,7 +91,6 @@ export default function CreatorCTA() {
           className="absolute top-[20px] sm:top-[30px] right-[12%] sm:right-[10%] w-[85px] sm:w-[188px] object-contain hidden md:block"
         />
 
-        {/* Top-Right White Cylinder - Arrive from Right */}
         <motion.img
           custom={0.12}
           initial="hidden"
@@ -109,7 +102,6 @@ export default function CreatorCTA() {
           className="absolute -top-[20px] sm:top-[10px] -right-[20px] sm:-right-[30px] w-[140px] sm:w-[210px] object-contain"
         />
 
-        {/* Bottom-Right Lime 3D Squiggle - Arrive from Right */}
         <motion.img
           custom={0.22}
           initial="hidden"
@@ -122,7 +114,6 @@ export default function CreatorCTA() {
         />
       </div>
 
-      {/* Content Container */}
       <div className="relative z-10 w-full max-w-[960px] mx-auto px-6 text-center flex flex-col items-center">
         <h2 className="font-poppins font-semibold text-[32px] sm:text-[40px] md:text-[44px] text-white leading-[1.2] tracking-[-0.01em]">
           Unlock Your Potential as a<br />Creator with ByteSpace
