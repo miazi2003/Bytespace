@@ -2,17 +2,17 @@
 
 @layer base {
   :root {
-    --bg-blue: #0052FE;
+    --bg-blue: #003BE2;
     --grid-line: rgba(255, 255, 255, 0.08);
   }
   body {
-    background-color: #0052FE;
+    background-color: #003BE2;
     font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, sans-serif;
   }
 }
 
 .font-poppins {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
 }
 
 .font-satoshi {
@@ -23,11 +23,63 @@
   font-family: 'Clash Display', sans-serif;
 }
 
+.font-soliden {
+  font-family: var(--font-soliden), 'Clash Display', sans-serif;
+}
+
 .bg-grid-pattern {
-  background-color: #0052FE;
+  background-color: #003BE2;
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-  background-size: 74px 74px;
+    linear-gradient(to right, rgba(255, 255, 255, 0.08) 2px, transparent 2px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 2px, transparent 2px);
+  background-size: 111px 111px;
   background-position: center top;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 18s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+@keyframes revealFade {
+  0% {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-reveal-fade {
+  animation: revealFade 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.swiper-pagination-bullet {
+  background: #CBD5E1 !important;
+  opacity: 1 !important;
+  width: 8px !important;
+  height: 8px !important;
+  transition: all 0.3s ease !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: #003BE2 !important;
+  width: 24px !important;
+  border-radius: 9999px !important;
 }
