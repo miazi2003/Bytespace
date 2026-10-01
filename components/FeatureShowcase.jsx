@@ -1,5 +1,53 @@
-import React from 'react';
+'use client';
+
+import React, { useEffect, useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 import CourseCard from './CourseCard';
+
+const smoothEase = [0.22, 1, 0.36, 1];
+
+// High-performance 0-re-render CountUp component using direct DOM textNode updates
+function CountUpNumber({ target, suffix = '', duration = 1.6 }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: '-40px' });
+
+  useEffect(() => {
+    if (!isInView || !ref.current) return;
+    let startTime = null;
+    let animationFrameId;
+
+    const step = (timestamp) => {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / (duration * 1000), 1);
+      // Velvety cubic ease-out
+      const easeOut = 1 - Math.pow(1 - progress, 3);
+      const val = Math.round(easeOut * target);
+
+      if (ref.current) {
+        ref.current.textContent = `${val}${suffix}`;
+      }
+
+      if (progress < 1) {
+        animationFrameId = requestAnimationFrame(step);
+      } else if (ref.current) {
+        ref.current.textContent = `${target}${suffix}`;
+      }
+    };
+
+    animationFrameId = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [isInView, target, suffix, duration]);
+
+  return (
+    <span
+      ref={ref}
+      className="font-poppins font-medium text-[40px] sm:text-[42px] lg:text-[36px] text-[#003BE2] leading-none tabular-nums inline-block select-none"
+      style={{ fontVariantNumeric: 'tabular-nums' }}
+    >
+      0{suffix}
+    </span>
+  );
+}
 
 const FIGMA_COURSE = {
   id: 1,
@@ -73,7 +121,14 @@ export default function FeatureShowcase() {
       <div className="relative z-10 w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-[00px] lg:gap-[60px]">
           {/* Left Text & Stats Column */}
-          <div className="w-full lg:w-1/2 flex flex-col items-start text-left">
+          <motion.div 
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.65, ease: smoothEase }}
+            style={{ willChange: 'transform, opacity' }}
+            className="w-full lg:w-1/2 flex flex-col items-start text-left"
+          >
             <h2 className="font-poppins font-semibold text-[32px] sm:text-[40px] lg:text-[44px] text-[#0F172A] leading-[1.18] mb-6">
               Your Path to Professional<br className="hidden sm:inline" /> Growth Starts Here!
             </h2>
@@ -81,59 +136,72 @@ export default function FeatureShowcase() {
               Explore our curated selection of courses tailored to enhance your capabilities and accelerate your career journey. Whether you are looking to sharpen specific skills, gain industry expertise, or embark on a new career path entirely, we have the resources you need.
             </p>
 
-            {/* Stats Counter Row */}
+            {/* Stats Counter Row: CountUp Animation */}
             <div className="w-full flex items-center justify-center lg:justify-start gap-8 sm:gap-10 lg:gap-12 mx-auto lg:mx-0">
-              <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
-                <span className="font-poppins font-medium text-[40px] sm:text-[42px] lg:text-[36px] text-[#003BE2] leading-none block">
-                  12K
-                </span>
+              <div className="flex flex-col items-center lg:items-start text-center lg:text-left min-w-[76px] sm:min-w-[90px]">
+                <CountUpNumber target={12} suffix="K" duration={1.6} />
                 <span className="font-satoshi text-[15px] sm:text-[16px] lg:text-[14px] text-[#82868E] mt-1.5 block">
                   Students
                 </span>
               </div>
-              <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
-                <span className="font-poppins font-medium text-[40px] sm:text-[42px] lg:text-[36px] text-[#003BE2] leading-none block">
-                  70+
-                </span>
+              <div className="flex flex-col items-center lg:items-start text-center lg:text-left min-w-[76px] sm:min-w-[90px]">
+                <CountUpNumber target={70} suffix="+" duration={1.6} />
                 <span className="font-satoshi text-[15px] sm:text-[16px] lg:text-[14px] text-[#82868E] mt-1.5 block">
                   Courses
                 </span>
               </div>
-              <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
-                <span className="font-poppins font-medium text-[40px] sm:text-[42px] lg:text-[36px] text-[#003BE2] leading-none block">
-                  16
-                </span>
+              <div className="flex flex-col items-center lg:items-start text-center lg:text-left min-w-[76px] sm:min-w-[90px]">
+                <CountUpNumber target={16} suffix="" duration={1.6} />
                 <span className="font-satoshi text-[15px] sm:text-[16px] lg:text-[14px] text-[#82868E] mt-1.5 block">
                   Creators
                 </span>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Composite Graphic Column */}
           <div className="w-full lg:w-1/2 flex items-center justify-center">
             <div className="relative w-full max-w-[420px] lg:max-w-[620px] h-[430px] sm:h-[520px] lg:h-[580px] overflow-visible">
               {/* Background Course Card (Desktop Only - hidden on mobile) */}
-              <div className="hidden lg:block absolute top-2 left-0 sm:left-2 z-0 w-[320px] sm:w-[373px]">
+              <motion.div 
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-50px' }}
+                transition={{ duration: 0.7, delay: 0.15, ease: smoothEase }}
+                style={{ willChange: 'transform, opacity' }}
+                className="hidden lg:block absolute top-2 left-0 sm:left-2 z-0 w-[320px] sm:w-[373px]"
+              >
                 <CourseCard course={FIGMA_COURSE} />
-              </div>
+              </motion.div>
 
               {/* Desktop 3D Lime Doodle (Frame (8).png) */}
-              <img
+              <motion.img
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-50px' }}
+                transition={{ duration: 0.7, delay: 0.25, ease: smoothEase }}
+                style={{ willChange: 'transform, opacity' }}
                 src="/images/Frame (8).png"
                 alt=""
                 className="hidden lg:block absolute top-6 sm:top-24 right-2 sm:-right-22 w-[120px] sm:w-[200px] object-contain z-22 select-none pointer-events-none"
               />
 
-              {/* Man Student Image (Large and Centered on Mobile) */}
+              {/* Man Student Image (Still & Anchored) */}
               <img
                 src="/images/29a52a24e51266edcd7d57d73392ee5fc4833220.png"
                 alt="Student with laptop"
                 className="absolute bottom-0 left-40 -translate-x-1/2 lg:translate-x-0 lg:bottom-12 lg:left-[3%] w-[450px] sm:w-[420px] lg:w-[580px] max-w-none object-contain z-10 select-none pointer-events-none drop-shadow-2xl"
               />
 
-              {/* Floating Learning Progress Card (Foreground on top of laptop with Doodle on Mobile) */}
-              <div className="absolute bottom-42 sm:bottom-6 left-[82%] -translate-x-1/2 lg:translate-x-0 lg:left-auto lg:bottom-52 lg:-right-12 z-20 bg-white rounded-[20px] sm:rounded-[24px] p-4 sm:p-6 shadow-[0_20px_50px_rgba(0,0,0,0.14)] border border-[#F1F5F9] w-[155px] sm:w-[240px]">
+              {/* Floating Learning Progress Card (Foreground with subtle fade) */}
+              <motion.div 
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-50px' }}
+                transition={{ duration: 0.7, delay: 0.2, ease: smoothEase }}
+                style={{ willChange: 'transform, opacity' }}
+                className="absolute bottom-42 sm:bottom-6 left-[82%] -translate-x-1/2 lg:translate-x-0 lg:left-auto lg:bottom-52 lg:-right-12 z-20 bg-white rounded-[20px] sm:rounded-[24px] p-4 sm:p-6 shadow-[0_20px_50px_rgba(0,0,0,0.14)] border border-[#F1F5F9] w-[155px] sm:w-[240px]"
+              >
                 {/* Mobile Doodle: on top of the 55% card */}
                 <img
                   src="/images/Frame (8).png"
@@ -148,9 +216,16 @@ export default function FeatureShowcase() {
                   55%
                 </span>
                 <div className="w-full h-2.5 bg-[#F1F5F9] rounded-full overflow-hidden">
-                  <div className="w-[55%] h-full bg-[#D4FB20] rounded-full" />
+                  <motion.div 
+                    initial={{ scaleX: 0 }}
+                    whileInView={{ scaleX: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.85, delay: 0.4, ease: smoothEase }}
+                    style={{ originX: 0, willChange: 'transform' }}
+                    className="w-[55%] h-full bg-[#D4FB20] rounded-full" 
+                  />
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
         </div>
@@ -163,7 +238,14 @@ export default function FeatureShowcase() {
           <div className="w-full lg:w-1/2 flex items-center justify-center order-2 lg:order-1">
             <div className="relative w-full max-w-[620px] h-[550px] sm:h-[580px]">
               {/* Card 1: Total Revenue Card (Top Left Base) */}
-              <div className="absolute top-2 sm:top-4 left-0 sm:left-2 z-0 w-[215px] sm:w-[232px] h-[110px] sm:h-[119px] bg-[#003BE2] rounded-[24px] p-4 sm:p-5 text-white flex flex-col justify-between shadow-[0_16px_36px_rgba(0,59,226,0.35)]">
+              <motion.div 
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-50px' }}
+                transition={{ duration: 0.65, delay: 0.1, ease: smoothEase }}
+                style={{ willChange: 'transform, opacity' }}
+                className="absolute top-2 sm:top-4 left-0 sm:left-2 z-0 w-[215px] sm:w-[232px] h-[110px] sm:h-[119px] bg-[#003BE2] rounded-[24px] p-4 sm:p-5 text-white flex flex-col justify-between shadow-[0_16px_36px_rgba(0,59,226,0.35)]"
+              >
                 <div>
                   <div className="flex items-center justify-between">
                     <span className="font-satoshi text-[13px] font-medium text-white/90">
@@ -178,12 +260,26 @@ export default function FeatureShowcase() {
                   </span>
                 </div>
                 <div className="w-full h-1.5 bg-white/20 rounded-full overflow-hidden">
-                  <div className="w-[68%] h-full bg-[#D4FB20] rounded-full" />
+                  <motion.div 
+                    initial={{ scaleX: 0 }}
+                    whileInView={{ scaleX: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: 0.35, ease: smoothEase }}
+                    style={{ originX: 0, willChange: 'transform' }}
+                    className="w-[68%] h-full bg-[#D4FB20] rounded-full" 
+                  />
                 </div>
-              </div>
+              </motion.div>
 
               {/* Card 2: Year to Date Card (Middle Left Base) */}
-              <div className="absolute top-[135px] sm:top-[145px] left-0 sm:left-2 z-0 w-[125px] sm:w-[134px] h-[125px] sm:h-[135px] bg-[#003BE2] rounded-[24px] p-4 text-white flex flex-col justify-between shadow-[0_16px_36px_rgba(0,59,226,0.35)]">
+              <motion.div 
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-50px' }}
+                transition={{ duration: 0.65, delay: 0.18, ease: smoothEase }}
+                style={{ willChange: 'transform, opacity' }}
+                className="absolute top-[135px] sm:top-[145px] left-0 sm:left-2 z-0 w-[125px] sm:w-[134px] h-[125px] sm:h-[135px] bg-[#003BE2] rounded-[24px] p-4 text-white flex flex-col justify-between shadow-[0_16px_36px_rgba(0,59,226,0.35)]"
+              >
                 <div>
                   <span className="font-satoshi text-[12px] font-medium text-white/90 block leading-tight">
                     Year to Date
@@ -198,16 +294,21 @@ export default function FeatureShowcase() {
                 <div className="bg-[#D4FB20] text-[#0F172A] font-satoshi font-bold text-[10px] px-2 py-0.5 rounded-full w-fit">
                   +12%
                 </div>
-              </div>
+              </motion.div>
 
               {/* 3D Lime Doodle (Frame (8).png) */}
-              <img
+              <motion.img
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-50px' }}
+                transition={{ duration: 0.7, delay: 0.25, ease: smoothEase }}
+                style={{ willChange: 'transform, opacity' }}
                 src="/images/testimage.png"
                 alt=""
                 className="absolute top-30 sm:top-18 -right-4 sm:right-28 w-[150px] sm:w-[180px] object-contain z-20 select-none pointer-events-none"
               />
 
-              {/* Woman Instructor Image (Overlapping Blue Cards) */}
+              {/* Woman Instructor Image (Still & Anchored) */}
               <img
                 src="/images/0d6596fb1df66aaf843ee85722f439fada233946.png"
                 alt="Instructor with headset and tablet"
@@ -215,7 +316,14 @@ export default function FeatureShowcase() {
               />
 
               {/* Card 3: Happy Students Card (Hero Block Matching) */}
-              <div className="absolute bg-white rounded-2xl shadow-[0_16px_36px_-4px_rgba(0,0,0,0.12),0_6px_16px_-4px_rgba(0,0,0,0.06)] z-20 text-left py-3 sm:py-3.5 px-3.5 sm:px-4.5 -bottom-11 sm:bottom-26 right-0 sm:right-[14px] w-max max-w-[95%]">
+              <motion.div 
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-50px' }}
+                transition={{ duration: 0.7, delay: 0.28, ease: smoothEase }}
+                style={{ willChange: 'transform, opacity' }}
+                className="absolute bg-white rounded-2xl shadow-[0_16px_36px_-4px_rgba(0,0,0,0.12),0_6px_16px_-4px_rgba(0,0,0,0.06)] z-20 text-left py-3 sm:py-3.5 px-3.5 sm:px-4.5 -bottom-11 sm:bottom-26 right-0 sm:right-[14px] w-max max-w-[95%]"
+              >
                 <div className="flex flex-col items-start justify-between gap-1 mb-2.5">
                   <span className="font-poppins font-medium text-[14px] sm:text-[16px] text-[#0F172A]">
                     Happy Students
@@ -244,12 +352,19 @@ export default function FeatureShowcase() {
                     2K+
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
 
           {/* Right Text & Bullets Column */}
-          <div className="w-full lg:w-1/2 flex flex-col items-start text-left order-1 lg:order-2">
+          <motion.div 
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.65, ease: smoothEase }}
+            style={{ willChange: 'transform, opacity' }}
+            className="w-full lg:w-1/2 flex flex-col items-start text-left order-1 lg:order-2"
+          >
             <h2 className="font-poppins font-semibold text-[32px] sm:text-[40px] lg:text-[44px] text-[#0F172A] leading-[1.18] mb-6">
               Create & Manage<br />Courses Easily.
             </h2>
@@ -260,7 +375,15 @@ export default function FeatureShowcase() {
             {/* Bullet Points List */}
             <div className="flex flex-col gap-4">
               {BULLET_POINTS.map((point, index) => (
-                <div key={index} className="flex items-center gap-3">
+                <motion.div 
+                  key={index} 
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-30px' }}
+                  transition={{ duration: 0.55, delay: 0.12 + index * 0.08, ease: smoothEase }}
+                  style={{ willChange: 'transform, opacity' }}
+                  className="flex items-center gap-3"
+                >
                   <img
                     src="/icon-images/bulleticon.png"
                     alt=""
@@ -269,10 +392,10 @@ export default function FeatureShowcase() {
                   <span className="font-satoshi font-medium text-[16px] text-[#0F172A]">
                     {point}
                   </span>
-                </div>
+                </motion.div>
               ))}
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

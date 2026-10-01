@@ -1,7 +1,10 @@
 'use client';
 
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import CourseCard from './CourseCard';
+
+const smoothEase = [0.22, 1, 0.36, 1];
 
 const FEATURED_COURSES = [
   {
@@ -123,6 +126,19 @@ const ALL_CATEGORIES = [
   ...ROW_3_CATEGORIES,
 ];
 
+const cardVariants = {
+  hidden: { opacity: 0, y: 15 },
+  visible: (i) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.65,
+      delay: (i % 3) * 0.1,
+      ease: smoothEase,
+    },
+  }),
+};
+
 export default function ExploreCourses() {
   const [activeCategory, setActiveCategory] = useState('Featured');
   const [showAllMobile, setShowAllMobile] = useState(false);
@@ -131,17 +147,29 @@ export default function ExploreCourses() {
     <section className="w-full py-[72px] bg-white flex flex-col">
       <div className="w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
         {/* Header Section */}
-        <div className="w-full max-w-[760px] mx-auto text-center mb-10">
+        <motion.div 
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-40px' }}
+          transition={{ duration: 0.65, ease: smoothEase }}
+          className="w-full max-w-[760px] mx-auto text-center mb-10"
+        >
           <h2 className="font-poppins font-semibold text-[32px] md:text-[44px] text-[#0F172A] leading-tight mb-4">
             Discover Your Passion,<br className="hidden sm:inline" /> Build Your Skills
           </h2>
           <p className="font-satoshi text-[16px] md:text-[18px] text-[#82868E] leading-relaxed">
             At Bytespace Courses, we bring you closer to life-changing knowledge. Explore a variety of courses across different fields, from technology to the arts, and make a difference in your career and life.
           </p>
-        </div>
+        </motion.div>
 
         {/* Filter Buttons Section: Desktop (100% untouched) */}
-        <div className="hidden md:flex w-full flex-col gap-3 mb-12">
+        <motion.div 
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-40px' }}
+          transition={{ duration: 0.65, delay: 0.1, ease: smoothEase }}
+          className="hidden md:flex w-full flex-col gap-3 mb-12"
+        >
           <div className="w-full flex flex-wrap items-center justify-center gap-[16px]">
             {ROW_1_CATEGORIES.map((cat) => (
               <button
@@ -198,7 +226,7 @@ export default function ExploreCourses() {
               + More
             </button>
           </div>
-        </div>
+        </motion.div>
 
         {/* Filter Buttons Section: Mobile (Inline 2 balanced lines, expandable with smooth fade) */}
         <div className="flex md:hidden w-full flex-wrap items-center justify-center gap-2 sm:gap-3 mb-10 transition-all duration-300">
@@ -230,10 +258,20 @@ export default function ExploreCourses() {
           </button>
         </div>
 
-        {/* Cards Grid */}
+        {/* Cards Grid with Subtle Fade & Very Little Motion */}
         <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 justify-items-center">
-          {FEATURED_COURSES.map((course) => (
-            <CourseCard key={course.id} course={course} />
+          {FEATURED_COURSES.map((course, index) => (
+            <motion.div
+              key={course.id}
+              custom={index}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-30px' }}
+              variants={cardVariants}
+              className="w-full max-w-[373px]"
+            >
+              <CourseCard course={course} />
+            </motion.div>
           ))}
         </div>
       </div>
