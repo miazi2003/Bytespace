@@ -41,13 +41,13 @@ export default function CoursesLoading() {
 
       <main className="w-full flex-1 py-10 lg:py-14 bg-white">
         <div className="w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col">
-          <div className="w-full flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 mb-6 relative">
-            <div className="flex flex-wrap items-center gap-3">
-              <div className="h-12 w-24 bg-slate-100 rounded-[24px] animate-pulse" />
-              <div className="h-12 w-28 bg-slate-100 rounded-[24px] animate-pulse" />
-              <div className="h-12 w-32 bg-slate-100 rounded-[24px] animate-pulse" />
+          <div className="w-full flex items-center justify-between gap-2 sm:gap-4 mb-6 relative">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <div className="h-11 w-11 sm:h-12 sm:w-24 bg-slate-100 rounded-[20px] sm:rounded-[24px] animate-pulse" />
+              <div className="h-11 w-11 sm:h-12 sm:w-28 bg-slate-100 rounded-[20px] sm:rounded-[24px] animate-pulse" />
+              <div className="h-11 w-11 sm:h-12 sm:w-32 bg-slate-100 rounded-[20px] sm:rounded-[24px] animate-pulse" />
             </div>
-            <div className="h-12 w-36 bg-slate-100 rounded-[24px] animate-pulse self-end sm:self-auto" />
+            <div className="h-11 w-11 sm:h-12 sm:w-36 bg-slate-100 rounded-[20px] sm:rounded-[24px] animate-pulse" />
           </div>
 
           <div className="w-full flex flex-wrap items-center justify-start gap-2 sm:gap-2.5 lg:gap-3 mb-8">

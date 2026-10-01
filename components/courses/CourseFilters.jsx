@@ -39,12 +39,13 @@ export default function CourseFilters({
 
   return (
     <>
-      <div className="w-full flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 mb-6 relative">
-        <div className="flex flex-wrap items-center gap-3">
+      <div className="w-full flex items-center justify-between gap-2 sm:gap-4 mb-6 relative">
+        <div className="flex items-center gap-2 sm:gap-3">
           <button
             type="button"
             onClick={handleResetFilters}
-            className="inline-flex items-center gap-2 px-4 py-3 rounded-[24px] border border-[#E2E8F0] bg-white hover:bg-[#F8FAFC] text-[#0F172A] font-satoshi font-medium text-[16px] transition-colors cursor-pointer"
+            aria-label="Filter"
+            className="inline-flex items-center justify-center gap-2 p-3 sm:px-4 sm:py-3 rounded-[20px] sm:rounded-[24px] border border-[#E2E8F0] bg-white hover:bg-[#F8FAFC] text-[#0F172A] font-satoshi font-medium text-[16px] transition-colors cursor-pointer"
           >
             <img
               src="/filterIcons/Vector (4).png"
@@ -54,7 +55,7 @@ export default function CourseFilters({
                 e.currentTarget.style.display = 'none';
               }}
             />
-            <span>Filter</span>
+            <span className="hidden sm:inline">Filter</span>
           </button>
 
           <div className="relative">
@@ -65,7 +66,8 @@ export default function CourseFilters({
                 setIsCategoryOpen(false);
                 setIsSortOpen(false);
               }}
-              className={`inline-flex items-center gap-2 px-4 py-3 rounded-[24px] border transition-colors cursor-pointer ${
+              aria-label={activeLevel === 'All Levels' ? 'Level' : activeLevel}
+              className={`inline-flex items-center justify-center gap-2 p-3 sm:px-4 sm:py-3 rounded-[20px] sm:rounded-[24px] border transition-colors cursor-pointer ${
                 activeLevel !== 'All Levels'
                   ? 'border-[#003BE2] bg-[#EFF6FF] text-[#003BE2]'
                   : 'border-[#E2E8F0] bg-white hover:bg-[#F8FAFC] text-[#0F172A]'
@@ -79,8 +81,8 @@ export default function CourseFilters({
                   e.currentTarget.style.display = 'none';
                 }}
               />
-              <span>{activeLevel === 'All Levels' ? 'Level' : activeLevel}</span>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <span className="hidden sm:inline">{activeLevel === 'All Levels' ? 'Level' : activeLevel}</span>
+              <svg className="hidden sm:block" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="6 9 12 15 18 9"></polyline>
               </svg>
             </button>
@@ -115,7 +117,8 @@ export default function CourseFilters({
                 setIsLevelOpen(false);
                 setIsSortOpen(false);
               }}
-              className={`inline-flex items-center gap-2 px-4 py-3 rounded-[24px] border transition-colors cursor-pointer ${
+              aria-label={activeCategory === 'Featured' ? 'Category' : activeCategory}
+              className={`inline-flex items-center justify-center gap-2 p-3 sm:px-4 sm:py-3 rounded-[20px] sm:rounded-[24px] border transition-colors cursor-pointer ${
                 activeCategory !== 'Featured'
                   ? 'border-[#003BE2] bg-[#EFF6FF] text-[#003BE2]'
                   : 'border-[#E2E8F0] bg-white hover:bg-[#F8FAFC] text-[#0F172A]'
@@ -129,14 +132,14 @@ export default function CourseFilters({
                   e.currentTarget.style.display = 'none';
                 }}
               />
-              <span>{activeCategory === 'Featured' ? 'Category' : activeCategory}</span>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <span className="hidden sm:inline">{activeCategory === 'Featured' ? 'Category' : activeCategory}</span>
+              <svg className="hidden sm:block" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="6 9 12 15 18 9"></polyline>
               </svg>
             </button>
 
             {isCategoryOpen && (
-              <div className="absolute top-full mt-2 left-0 w-52 bg-white border border-[#E2E8F0] rounded-[16px] shadow-lg py-2 z-30 max-h-60 overflow-y-auto">
+              <div className="absolute top-full mt-2 left-0 w-52 max-w-[calc(100vw-32px)] bg-white border border-[#E2E8F0] rounded-[16px] shadow-lg py-2 z-30 max-h-60 overflow-y-auto">
                 {COURSE_FILTER_CATEGORIES.map((cat) => (
                   <button
                     key={cat}
@@ -158,7 +161,7 @@ export default function CourseFilters({
           </div>
         </div>
 
-        <div className="relative self-end sm:self-auto">
+        <div className="relative">
           <button
             type="button"
             onClick={() => {
@@ -166,7 +169,8 @@ export default function CourseFilters({
               setIsLevelOpen(false);
               setIsCategoryOpen(false);
             }}
-            className="inline-flex items-center gap-2 px-4 py-3 rounded-[24px] border border-[#E2E8F0] bg-white hover:bg-[#F8FAFC] text-[#0F172A] font-satoshi font-medium text-[16px] transition-colors cursor-pointer"
+            aria-label={sortBy}
+            className="inline-flex items-center justify-center gap-2 p-3 sm:px-4 sm:py-3 rounded-[20px] sm:rounded-[24px] border border-[#E2E8F0] bg-white hover:bg-[#F8FAFC] text-[#0F172A] font-satoshi font-medium text-[16px] transition-colors cursor-pointer"
           >
             <img
               src="/filterIcons/Vector (7).png"
@@ -176,14 +180,14 @@ export default function CourseFilters({
                 e.currentTarget.style.display = 'none';
               }}
             />
-            <span>{sortBy}</span>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <span className="hidden sm:inline">{sortBy}</span>
+            <svg className="hidden sm:block" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="6 9 12 15 18 9"></polyline>
             </svg>
           </button>
 
           {isSortOpen && (
-            <div className="absolute top-full mt-2 right-0 w-48 bg-white border border-[#E2E8F0] rounded-[16px] shadow-lg py-2 z-30">
+            <div className="absolute top-full mt-2 right-0 w-48 max-w-[calc(100vw-32px)] bg-white border border-[#E2E8F0] rounded-[16px] shadow-lg py-2 z-30">
               {COURSE_SORT_OPTIONS.map((opt) => (
                 <button
                   key={opt}
