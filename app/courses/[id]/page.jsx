@@ -215,13 +215,10 @@ export default function CourseDetailsPage(props) {
 
                 {/* Enroll Now Button */}
                 <button
-                  onClick={() => {
-                    setIsEnrolled(true);
-                    setTimeout(() => setIsEnrolled(false), 3000);
-                  }}
+                  onClick={() => setIsEnrolled(true)}
                   className="w-full bg-[#D4FB20] hover:bg-[#C4EC00] active:scale-[0.98] text-[#0F172A] font-poppins font-medium text-[16px] rounded-full transition-all cursor-pointer shadow-sm flex items-center justify-center gap-2 mt-2 mb-8 px-6 py-3"
                 >
-                  {isEnrolled ? 'Enrolled Successfully!' : 'Enroll Now'}
+                  {isEnrolled ? '✓ Enrolled' : 'Enroll Now'}
                 </button>
 
                 {/* This course include Section with exact 24px vector icons */}
