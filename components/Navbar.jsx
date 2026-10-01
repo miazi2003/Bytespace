@@ -34,7 +34,7 @@ export default function Navbar() {
               </a>
             </li>
             <li>
-              <a href="/#creators" className="font-satoshi text-[16px] font-thin text-white/95 hover:text-white transition-opacity">
+              <a href="/creators" className="font-satoshi text-[16px] font-thin text-white/95 hover:text-white transition-opacity">
                 Creators
               </a>
             </li>
@@ -47,7 +47,7 @@ export default function Navbar() {
             <a href="/register" className="font-satoshi text-[16px] font-thin text-white/95 hover:text-white transition-opacity">
               Join Us
             </a>
-            <a href="#cart" className="text-white/95 hover:text-white hover:scale-105 transition-all p-0.5" aria-label="Shopping Bag">
+            <a href="/cart" className="text-white/95 hover:text-white hover:scale-105 transition-all p-0.5" aria-label="Shopping Bag">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="3.5" y="7" width="17" height="14" rx="2.5" />
                 <path d="M8 9.5V5a4 4 0 0 1 8 0v4.5" />
@@ -87,8 +87,11 @@ export default function Navbar() {
           <a href="/courses" onClick={() => setMobileMenuOpen(false)} className="font-satoshi text-[17px] font-thin text-white hover:text-[#D5FF00]">
             Courses
           </a>
-          <a href="/#creators" onClick={() => setMobileMenuOpen(false)} className="font-satoshi text-[17px] font-thin text-white hover:text-[#D5FF00]">
+          <a href="/creators" onClick={() => setMobileMenuOpen(false)} className="font-satoshi text-[17px] font-thin text-white hover:text-[#D5FF00]">
             Creators
+          </a>
+          <a href="/cart" onClick={() => setMobileMenuOpen(false)} className="font-satoshi text-[17px] font-thin text-white hover:text-[#D5FF00]">
+            Cart
           </a>
           <hr className="border-white/15 my-1" />
           <a href="/login" onClick={() => setMobileMenuOpen(false)} className="font-satoshi text-[17px] font-thin text-white hover:text-[#D5FF00]">

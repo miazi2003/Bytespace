@@ -1,6 +1,8 @@
 import React from 'react';
+import Link from 'next/link';
 
 export default function CourseCard({ course }) {
+  const courseId = parseInt(course?.id, 10) || 1;
   const {
     image,
     lessons = '17 Lessons',
@@ -22,13 +24,16 @@ export default function CourseCard({ course }) {
   } = course;
 
   return (
-    <div className="w-full max-w-[373px] h-[384px] bg-white rounded-[24px] border border-[#E5E7EB] p-4 flex flex-col justify-between shadow-[0_4px_20px_rgba(0,0,0,0.04)]">
+    <Link
+      href={`/courses/${courseId}`}
+      className="group block w-full max-w-[373px] h-[384px] bg-white rounded-[24px] border border-[#E5E7EB] p-4 flex flex-col justify-between shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_12px_32px_rgba(0,59,226,0.12)] hover:border-[#003BE2]/30 transition-all duration-300"
+    >
       <div>
         <div className="relative w-full h-[165px] rounded-[12px] overflow-hidden bg-slate-100">
           <img
             src={image}
             alt={title}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           />
           <div className="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between gap-[12px]">
             <span className="bg-white/75 backdrop-blur-md px-2.5 py-1 rounded-full text-[11px] font-satoshi font-medium text-[#1E293B]">
@@ -97,6 +102,6 @@ export default function CourseCard({ course }) {
           </span>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

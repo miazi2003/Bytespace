@@ -5,29 +5,29 @@ import React from 'react';
 const NAV_COLUMNS = [
   {
     links: [
-      { label: 'Featured Courses', href: '#courses' },
-      { label: 'Featured Categories', href: '#categories' },
-      { label: 'Business', href: '#business' },
-      { label: 'IT', href: '#it' },
-      { label: 'Design', href: '#design' },
+      { label: 'Featured Courses', href: '/courses' },
+      { label: 'Featured Categories', href: '/categories' },
+      { label: 'Business', href: '/categories/business' },
+      { label: 'IT', href: '/categories/it' },
+      { label: 'Design', href: '/categories/design' },
     ],
   },
   {
     links: [
-      { label: 'Development', href: '#development' },
-      { label: 'Marketing', href: '#marketing' },
-      { label: 'Photography', href: '#photography' },
-      { label: 'Finance', href: '#finance' },
-      { label: 'Sport', href: '#sport' },
+      { label: 'Development', href: '/categories/development' },
+      { label: 'Marketing', href: '/categories/marketing' },
+      { label: 'Photography', href: '/categories/photography' },
+      { label: 'Finance', href: '/categories/finance' },
+      { label: 'Sport', href: '/categories/sport' },
     ],
   },
   {
     links: [
-      { label: 'Become a Creator', href: '#creator' },
-      { label: 'Affiliate Program', href: '#affiliate' },
-      { label: 'Contact', href: '#contact' },
-      { label: 'Help', href: '#help' },
-      { label: 'About', href: '#about' },
+      { label: 'Become a Creator', href: '/creators' },
+      { label: 'Affiliate Program', href: '/affiliate' },
+      { label: 'Contact', href: '/contact' },
+      { label: 'Help', href: '/help' },
+      { label: 'About', href: '/about' },
     ],
   },
 ];
@@ -41,7 +41,7 @@ export default function Footer() {
           {/* Left Column: Logo & Newsletter */}
           <div className="flex flex-col max-w-[500px]">
             {/* Logo */}
-            <a href="#" className="flex items-end gap-2.5 select-none focus:outline-none mb-4">
+            <a href="/" className="flex items-end gap-2.5 select-none focus:outline-none mb-4">
               <img
                 src="/logo.png"
                 alt="ByteSpace Icon"
@@ -111,19 +111,19 @@ export default function Footer() {
             {/* Legal / Policy Links */}
             <div className="flex items-center gap-6 sm:gap-8">
               <a
-                href="#privacy"
+                href="/privacy"
                 className="font-satoshi text-[12px] text-[#0F172A] hover:text-[#003BE2] transition-colors"
               >
                 Privacy Policy
               </a>
               <a
-                href="#terms"
+                href="/terms"
                 className="font-satoshi text-[12px] text-[#0F172A] hover:text-[#003BE2] transition-colors"
               >
                 Terms of Service
               </a>
               <a
-                href="#cookies"
+                href="/cookies"
                 className="font-satoshi text-[12px] text-[#0F172A] hover:text-[#003BE2] transition-colors"
               >
                 Cookies Settings

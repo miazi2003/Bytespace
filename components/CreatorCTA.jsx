@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 export default function CreatorCTA() {
   return (
@@ -65,12 +66,12 @@ export default function CreatorCTA() {
           Experience the collaboration of numerous creators and an expanding selection of courses. Register now and become a part of a community comprising over 10,000 local and international creators. Utilize our Course Editor, and showcase your expertise by publishing your finest course on the ByteSpace Course Library.
         </p>
 
-        <button
-          type="button"
-          className="bg-[#D4FB20] hover:bg-[#C4EC00] active:scale-[0.98] text-[#0F172A] font-satoshi font-medium text-[16px] px-[24px] py-[12px] rounded-full transition-all duration-200 cursor-pointer shadow-sm"
+        <Link
+          href="/creators"
+          className="bg-[#D4FB20] hover:bg-[#C4EC00] active:scale-[0.98] text-[#0F172A] font-satoshi font-medium text-[16px] px-[24px] py-[12px] rounded-full transition-all duration-200 cursor-pointer shadow-sm inline-block"
         >
           Join as Creator
-        </button>
+        </Link>
       </div>
     </section>
   );

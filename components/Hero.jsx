@@ -39,7 +39,16 @@ export default function Hero() {
 
         <form 
           className="flex items-center justify-center gap-3 sm:gap-3.5 mx-auto relative z-20 w-full max-w-[580px]"
-          onSubmit={(e) => e.preventDefault()}
+          onSubmit={(e) => {
+            e.preventDefault();
+            const input = e.currentTarget.querySelector('input');
+            const val = input ? input.value.trim() : '';
+            if (val) {
+              window.location.href = `/courses?search=${encodeURIComponent(val)}`;
+            } else {
+              window.location.href = '/courses';
+            }
+          }}
           role="search"
         >
           <div className="w-full max-w-[461px] h-[52px] bg-white rounded-full px-5 sm:px-6 flex items-center gap-3 shadow-[0_10px_25px_rgba(0,0,0,0.08)]">
