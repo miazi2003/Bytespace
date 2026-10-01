@@ -1,12 +1,19 @@
 import 'lenis/dist/lenis.css';
 import './globals.css';
 import { Poppins } from 'next/font/google';
+import localFont from 'next/font/local';
 import SmoothScroll from '../components/SmoothScroll';
 
 const poppins = Poppins({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700', '800'],
   variable: '--font-poppins',
+  display: 'swap',
+});
+
+const soliden = localFont({
+  src: '../public/fonts/SolidenTrial-BlackExpanded.otf',
+  variable: '--font-soliden',
   display: 'swap',
 });
 
@@ -17,7 +24,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={poppins.variable}>
+    <html lang="en" className={`${poppins.variable} ${soliden.variable}`}>
       <head>
         <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="anonymous" />
         <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&f[]=clash-display@400,500,600,700&display=swap" rel="stylesheet" />
